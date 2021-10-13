@@ -9,6 +9,9 @@ const routes: Routes = [
   }
 ];
 
+/**
+ * Core routing module. Defines the top level routes of the application.
+ */
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
