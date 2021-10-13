@@ -9,6 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LandingComponent } from './components/landing/landing.component';
 
+/**
+ * Core module. Imports main modules and the core router module.
+ */
 @NgModule({
   declarations: [
     CoreComponent,

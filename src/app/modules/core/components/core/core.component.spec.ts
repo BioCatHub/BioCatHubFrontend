@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CoreComponent } from './app.component';
+import { CoreComponent } from './core.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -20,7 +20,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'BioCatHubFrontend'`, () => {
+  it('should have as title \'BioCatHubFrontend\'', () => {
     const fixture = TestBed.createComponent(CoreComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('BioCatHubFrontend');
