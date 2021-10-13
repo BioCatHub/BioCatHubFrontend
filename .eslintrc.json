@@ -19,20 +19,79 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
+        "@typescript-eslint/consistent-type-definitions": "error",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "off",
           {
-            "type": "attribute",
-            "prefix": "bch",
-            "style": "camelCase"
+            "accessibility": "explicit"
           }
         ],
-        "@angular-eslint/component-selector": [
+        "@typescript-eslint/naming-convention": [
+          "warn",
+          {
+            "selector": "enumMember",
+            "format": [
+              "UPPER_CASE",
+              "camelCase"
+            ]
+          }
+        ],
+        "brace-style": [
+          "error",
+          "1tbs"
+        ],
+        "max-len": [
+          2,
+          {
+            "code": 148,
+            "ignorePattern": "^import .*"
+          }
+        ],
+        "dot-notation": "off",
+        "id-blacklist": "off",
+        "id-match": "off",
+        "indent": [
+          "error",
+          2,
+          {
+            "SwitchCase": 1
+          }
+        ],
+        "no-empty-function": "off",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": [
+          "error"
+        ],
+        "no-underscore-dangle": "off",
+        "no-unused-expressions": "error",
+        "quotes": [
+          2,
+          "single",
+          {
+            "avoidEscape": true
+          }
+        ],
+        "semi": "error",
+        "jsdoc/require-jsdoc": [
           "error",
           {
-            "type": "element",
-            "prefix": "bch",
-            "style": "kebab-case"
+            "require": {
+              "FunctionDeclaration": true,
+              "MethodDefinition": true,
+              "ClassDeclaration": true,
+              "ArrowFunctionExpression": false,
+              "FunctionExpression": false
+            },
+            "contexts": [
+              "TSInterfaceDeclaration",
+              "TSTypeAliasDeclaration",
+              "TSEnumDeclaration"
+            ],
+            "enableFixer": false,
+            "checkConstructors": false,
+            "checkGetters": false,
+            "checkSetters": false
           }
         ]
       }
