@@ -1,14 +1,21 @@
 import {Attribute} from './attribute';
-import {BufferSolution} from './buffer-solution';
+import {Buffer} from './buffer';
+import {PH} from './ph';
+import {Temperature} from './temperature';
+import {Solvent} from './solvent';
 
 /**
  * Model of a condition.
  */
 export class Condition {
-  temp: number;
+
+  type: string;
+  temperature: Temperature;
   unit: string;
-  ph: number;
-  buffer: BufferSolution;
+  pHs: PH[];
+  buffers: Buffer[];
+  solvents: Solvent[];
+  reactionSystem: string;
   others: Attribute[];
 
   constructor() {
@@ -23,10 +30,13 @@ export class Condition {
    */
   public static deserialize(payload: any): Condition {
     const condition = new Condition();
-    condition.temp = payload.temp;
+    condition.type = payload.type;
     condition.unit = payload.unit;
-    condition.ph = payload.ph;
-    condition.buffer = payload.buffer;
+    condition.temperature = Temperature.deserialize(payload.temperature);
+    condition.pHs = payload.pHs.map(PH.deserialize);
+    condition.reactionSystem = payload.reactionSystem;
+    condition.buffers = payload.buffers.map(Buffer.deserialize);
+    condition.solvents = payload.solvents.map(Solvent.deserialize);
     condition.others = payload.others.map(Attribute.deserialize);
     return condition;
   }
@@ -39,10 +49,13 @@ export class Condition {
    */
   public static serialize(condition: Condition): any {
     return {
-      temp: condition.temp,
+      type: condition.type,
+      temperature: Temperature.serialize(condition.temperature),
       unit: condition.unit,
-      ph: condition.ph,
-      buffer: condition.buffer,
+      pHs: condition.pHs.map(PH.serialize),
+      reactionSystem: condition.reactionSystem,
+      buffers: condition.buffers.map(Buffer.serialize),
+      solvents: condition.solvents.map(Solvent.serialize),
       others: condition.others.map(Attribute.serialize),
     };
   }

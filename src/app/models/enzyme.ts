@@ -5,6 +5,7 @@ import {Reaction} from './reaction';
  * Model of an enzyme.
  */
 export class Enzyme {
+
   ecNumber: string;
   name: string;
   type: string;
@@ -15,8 +16,8 @@ export class Enzyme {
   unit: string;
   formulation: string;
   method: string;
-  others: Array<Attribute>;
-  reaction: Reaction;
+  others: Attribute[];
+  reactions: Reaction[];
 
   constructor() {
     this.others = [];
@@ -40,7 +41,7 @@ export class Enzyme {
     enzyme.unit = payload.unit;
     enzyme.formulation = payload.formulation;
     enzyme.method = payload.method;
-    enzyme.reaction = payload.reaction;
+    enzyme.reactions = payload.reactions.map(Reaction.deserialize);
     enzyme.others = payload.others.map(Attribute.deserialize);
     return enzyme;
   }
@@ -63,7 +64,7 @@ export class Enzyme {
       unit: enzyme.unit,
       formulation: enzyme.formulation,
       method: enzyme.method,
-      reaction: enzyme.reaction,
+      reactions: enzyme.reactions.map(Reaction.deserialize),
       others: enzyme.others.map(Attribute.serialize),
     };
   }

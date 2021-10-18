@@ -3,6 +3,7 @@ import {Vessel} from './vessel';
 import {Condition} from './condition';
 import {ExperimentalData} from './experimental-data';
 import {User} from './user';
+import {AdditionalExperiment} from './additional-experiment';
 
 /**
  * Model of an experiment.
@@ -16,6 +17,7 @@ export class Experiment {
   condition: Condition;
   experimentalData: ExperimentalData;
   user: User;
+  additionalExperiments: AdditionalExperiment[];
 
   constructor() {
     this.enzymes = [];
@@ -36,6 +38,7 @@ export class Experiment {
     experiment.condition = Condition.deserialize(payload.condition);
     experiment.experimentalData = ExperimentalData.deserialize(payload.experimentalData);
     experiment.user = User.deserialize(payload.user);
+    experiment.additionalExperiments = payload.additionalExperiments.map(AdditionalExperiment.deserialize);
     return experiment;
   }
 
@@ -53,7 +56,8 @@ export class Experiment {
       vessel: Vessel.serialize(experiment.vessel),
       condition: Condition.serialize(experiment.condition),
       experimentalData: ExperimentalData.serialize(experiment.experimentalData),
-      user: User.serialize(experiment.user)
+      user: User.serialize(experiment.user),
+      additionalExperiments: experiment.additionalExperiments.map(AdditionalExperiment.serialize),
     };
   }
 

@@ -7,6 +7,7 @@ export class Reactant {
 
   id: string;
   name: string;
+  stoichometricCoefficient: number;
   role: string;
   concentration: number;
   unit: string;
@@ -38,6 +39,7 @@ export class Reactant {
     reactant.supplier = payload.supplier;
     reactant.formula = payload.formula;
     reactant.smiles = payload.smiles;
+    reactant.stoichometricCoefficient = payload.stoichometricCoefficient;
     reactant.imageUrl = payload.imageUrl;
     reactant.others = payload.others.map(Attribute.deserialize);
     return reactant;
@@ -59,6 +61,7 @@ export class Reactant {
       purity: reactant.purity,
       supplier: reactant.supplier,
       formula: reactant.formula,
+      stoichometricCoefficient: reactant.stoichometricCoefficient,
       smiles: reactant.smiles,
       imageUrl: reactant.imageUrl,
       others: reactant.others.map(Attribute.serialize),
