@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {ExperimentFormService} from '../../services/experiment-form.service';
 
 /**
  * Editor form for experiments.
@@ -9,4 +10,12 @@ import {Component} from '@angular/core';
   styleUrls: ['./experiment-editor.component.scss']
 })
 export class ExperimentEditorComponent {
+
+  constructor(private experimentFormService: ExperimentFormService) {
+  }
+
+  submitForm() {
+    // TODO write formmodel in experiment model and send to server
+  }
+
 }

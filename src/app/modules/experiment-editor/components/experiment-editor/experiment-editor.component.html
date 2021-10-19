@@ -1,1 +1,29 @@
-<p>experiment-editor works!</p>
+<clr-timeline>
+  <clr-timeline-step [clrState]="'vessel' | timelineFormState | async">
+    <clr-timeline-step-header>header</clr-timeline-step-header>
+    <clr-timeline-step-title>title</clr-timeline-step-title>
+    <clr-timeline-step-description>description</clr-timeline-step-description>
+  </clr-timeline-step>
+  <clr-timeline-step [clrState]="'biocatalyst' | timelineFormState | async">
+    <clr-timeline-step-header>header</clr-timeline-step-header>
+    <clr-timeline-step-title>title</clr-timeline-step-title>
+    <clr-timeline-step-description>description</clr-timeline-step-description>
+  </clr-timeline-step>
+  <clr-timeline-step [clrState]="'reactants' | timelineFormState | async">
+    <clr-timeline-step-header>header</clr-timeline-step-header>
+    <clr-timeline-step-title>title</clr-timeline-step-title>
+    <clr-timeline-step-description>description</clr-timeline-step-description>
+  </clr-timeline-step>
+  <clr-timeline-step [clrState]="'conditions' | timelineFormState | async">
+    <clr-timeline-step-header>header</clr-timeline-step-header>
+    <clr-timeline-step-title>title</clr-timeline-step-title>
+    <clr-timeline-step-description>description</clr-timeline-step-description>
+  </clr-timeline-step>
+  <clr-timeline-step [clrState]="'experimentalData' | timelineFormState | async">
+    <clr-timeline-step-header>header</clr-timeline-step-header>
+    <clr-timeline-step-title>title</clr-timeline-step-title>
+    <clr-timeline-step-description>description</clr-timeline-step-description>
+  </clr-timeline-step>
+</clr-timeline>
+
+<router-outlet></router-outlet>
