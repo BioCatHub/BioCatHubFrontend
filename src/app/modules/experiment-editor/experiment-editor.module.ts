@@ -10,7 +10,8 @@ import {VesselFormComponent} from './components/vessel-form/vessel-form.componen
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ExperimentFormService} from './services/experiment-form.service';
 import {ClarityModule} from '@clr/angular';
-import {TimelineFormStatePipe} from './pipes/timeline-form-state.pipe';
+import {CdsModule} from '@cds/angular';
+import {TimelineStepStateDirective} from './util/timeline-step-state.directive';
 
 /**
  * Module that contains the experiment editor.
@@ -23,14 +24,15 @@ import {TimelineFormStatePipe} from './pipes/timeline-form-state.pipe';
     ReactantsFormComponent,
     BiocatalystFormComponent,
     VesselFormComponent,
-    TimelineFormStatePipe
+    TimelineStepStateDirective
   ],
   imports: [
     CommonModule,
     ExperimentEditorRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ClarityModule
+    ClarityModule,
+    CdsModule
   ],
   providers: [
     ExperimentFormService
