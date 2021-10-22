@@ -43,6 +43,7 @@ export class TimelineStepStateDirective implements OnInit {
       }
     });
     this.router.routerState.root.firstChild?.firstChild?.firstChild?.data.subscribe(data => {
+      // TODO make step an Input and drop all this router data stuff
       if (data.formGroupName) {
         this.isCurrentStep = this.stepName === data.formGroupName;
         this.computeState();
