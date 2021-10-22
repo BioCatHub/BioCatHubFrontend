@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 /**
  * Service that manages the experiment form.
@@ -18,11 +18,21 @@ export class ExperimentFormService {
    */
   buildForm() {
     this._experimentForm = this.fb.group({
-      biocatalyst: {},
-      conditions: {},
-      experimentalData: {},
-      reactants: {},
-      vessel: {},
+      biocatalyst: this.fb.group({
+        test: ['', [Validators.required]]
+      }),
+      conditions: this.fb.group({
+        test: ['', [Validators.required]]
+      }),
+      experimentalData: this.fb.group({
+        test: ['', [Validators.required]]
+      }),
+      reactants: this.fb.group({
+        test: ['', [Validators.required]]
+      }),
+      vessel: this.fb.group({
+        test: ['', [Validators.required]]
+      })
     });
   }
 

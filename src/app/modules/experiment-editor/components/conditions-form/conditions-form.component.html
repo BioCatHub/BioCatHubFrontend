@@ -1,1 +1,9 @@
-<p>conditions-form works!</p>
+<form clrForm clrLayout="horizontal" [formGroup]="form">
+
+  <clr-input-container>
+    <label>Conditions form test</label>
+    <input clrInput formControlName="test"/>
+    <clr-control-error *clrIfError="'required'">Required</clr-control-error>
+  </clr-input-container>
+
+</form>

@@ -15,6 +15,7 @@ export class TimelineStepStateDirective implements OnInit {
   private isValid = false;
   private isDirty = false;
   private isCurrentStep = false;
+  private formGroupName: string;
 
   constructor(private experimentFormService: ExperimentFormService,
               private cdr: ChangeDetectorRef,
@@ -25,7 +26,6 @@ export class TimelineStepStateDirective implements OnInit {
     this.computeIsCurrentStep();
     this.cdr.detectChanges();
     this.experimentFormService.getExperimentFormSubGroup(this.stepName).statusChanges.subscribe(status => {
-      // todo can we use the valid dirty props of the group and skip one block?
       if (status === 'VALID') {
         this.isValid = true;
         this.isDirty = true;
@@ -40,6 +40,12 @@ export class TimelineStepStateDirective implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.computeIsCurrentStep();
+      }
+    });
+    this.router.routerState.root.firstChild?.firstChild?.firstChild?.data.subscribe(data => {
+      if (data.formGroupName) {
+        this.isCurrentStep = this.stepName === data.formGroupName;
+        this.computeState();
       }
     });
   }
