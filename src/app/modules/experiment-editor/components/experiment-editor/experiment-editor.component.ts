@@ -1,4 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
+import {ExperimentEditorStep} from '../../interfaces/experiment-editor-step.interface';
 
 /**
  * Editor form for experiments.
@@ -10,12 +11,32 @@ import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
 })
 export class ExperimentEditorComponent implements AfterViewInit {
 
-  public timelineSteps = [
-    'vessel',
-    'biocatalyst',
-    'reactants',
-    'conditions',
-    'experimentalData'
+  public timelineSteps: ExperimentEditorStep[] = [
+    {
+      formControlName: 'vessel',
+      pathSegment: 'vessel',
+      title: 'Vessel'
+    },
+    {
+      formControlName: 'biocatalyst',
+      pathSegment: 'biocatalyst',
+      title: 'Biocatalyst'
+    },
+    {
+      formControlName: 'reactants',
+      pathSegment: 'reactants',
+      title: 'Reactants'
+    },
+    {
+      formControlName: 'conditions',
+      pathSegment: 'conditions',
+      title: 'Conditions'
+    },
+    {
+      formControlName: 'experimentalData',
+      pathSegment: 'experimental-data',
+      title: 'Experimental data'
+    }
   ];
 
   constructor(private cdr: ChangeDetectorRef) {
