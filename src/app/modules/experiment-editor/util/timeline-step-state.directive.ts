@@ -2,6 +2,8 @@ import {ChangeDetectorRef, Directive, Input, OnInit} from '@angular/core';
 import {ExperimentFormService} from '../services/experiment-form.service';
 import {NavigationEnd, Router} from '@angular/router';
 
+// TODO unsubscribe on destroy
+
 @Directive({
   selector: '[bchTimelineStepState]',
   exportAs: 'state'
