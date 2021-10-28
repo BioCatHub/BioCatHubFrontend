@@ -31,7 +31,9 @@ export class ExperimentFormService {
         test: ['', [Validators.required]]
       }),
       vessel: this.fb.group({
-        test: ['', [Validators.required]]
+        type: ['', [Validators.required]],
+        volume: ['', [Validators.required]], // TODO validate number
+        unit: ['', [Validators.required]],
       })
     });
   }

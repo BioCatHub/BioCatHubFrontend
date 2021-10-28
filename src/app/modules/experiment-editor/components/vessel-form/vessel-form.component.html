@@ -1,9 +1,54 @@
-<form clrForm clrLayout="horizontal" [formGroup]="form">
+<h1>Vessels & Volumes</h1>
 
-  <clr-input-container>
-    <label>Vessel form test</label>
-    <input clrInput formControlName="test"/>
-    <clr-control-error *clrIfError="'required'">Required</clr-control-error>
-  </clr-input-container>
+<div class="card">
+  <div class="card-block">
 
-</form>
+    <form [formGroup]="form">
+      <div cds-layout="vertical gap:lg">
+
+        <cds-input layout="vertical" bchFormGroup>
+          <label>Type</label>
+          <input placeholder="e.g. Eppendorf tube" formControlName="type" bchFormControl/>
+          <cds-control-message>message text</cds-control-message>
+          <cds-control-message status="error" *bchIfError="'required';controlName: 'type'">
+            message text
+          </cds-control-message>
+        </cds-input>
+
+        <cds-input-group layout="vertical">
+          <label>Volume</label>
+          <cds-input>
+            <label>Volume</label>
+            <input placeholder="e.g. 100" type="number" formControlName="volume"/>
+          </cds-input>
+          <cds-select cds-layout="align:shrink">
+            <label>Unit</label>
+            <select>
+              <option>ml</option>
+              <option>µL</option>
+              <option>L</option>
+              <option>m³</option>
+            </select>
+          </cds-select>
+          <cds-control-message>Maximum host budget for billing period</cds-control-message>
+          <cds-control-message status="error">Maximum host budget for billing period</cds-control-message>
+        </cds-input-group>
+
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+<!--<clr-input-container>-->
+<!--  <label>Type</label>-->
+<!--  <input clrInput formControlName="type"/>-->
+<!--  <clr-control-error *clrIfError="'required'">Required</clr-control-error>-->
+<!--</clr-input-container>-->
+
+<!--<clr-input-container>-->
+<!--  <label>Volume</label>-->
+<!--  <input clrInput formControlName="volume"/>-->
+<!--  <clr-control-error *clrIfError="'required'">Required</clr-control-error>-->
+<!--</clr-input-container>-->

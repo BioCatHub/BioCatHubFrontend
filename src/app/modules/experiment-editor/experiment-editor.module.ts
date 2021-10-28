@@ -12,6 +12,7 @@ import {ExperimentFormService} from './services/experiment-form.service';
 import {ClarityModule} from '@clr/angular';
 import {CdsModule} from '@cds/angular';
 import {TimelineStepStateDirective} from './util/timeline-step-state.directive';
+import {SharedModule} from '../shared/shared.module';
 
 /**
  * Module that contains the experiment editor.
@@ -32,7 +33,8 @@ import {TimelineStepStateDirective} from './util/timeline-step-state.directive';
     FormsModule,
     ReactiveFormsModule,
     ClarityModule,
-    CdsModule
+    CdsModule,
+    SharedModule
   ],
   providers: [
     ExperimentFormService
