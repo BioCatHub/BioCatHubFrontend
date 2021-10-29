@@ -41,6 +41,7 @@ export class IfErrorDirective implements OnInit {
     } else {
       this.destroyView();
     }
+    this.formControlService.onErrorStateChange();
   }
 
   createView() {

@@ -1,20 +1,23 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {IfErrorDirective} from './directives/if-error.directive';
+import {IfNoErrorDirective} from './directives/if-no-error.directive';
 import {FormGroupDirective} from './directives/form-group.directive';
 import {FormControlDirective} from './directives/form-control.directive';
+import {IfErrorDirective} from './directives/if-error.directive';
 
 
 @NgModule({
   declarations: [
-    IfErrorDirective,
+    IfNoErrorDirective,
     FormGroupDirective,
-    FormControlDirective
+    FormControlDirective,
+    IfErrorDirective,
   ],
   imports: [
     CommonModule
   ],
   exports: [
+    IfNoErrorDirective,
     IfErrorDirective,
     FormGroupDirective,
     FormControlDirective

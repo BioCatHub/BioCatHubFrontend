@@ -4,37 +4,42 @@
   <div class="card-block">
 
     <form [formGroup]="form">
-      <div cds-layout="vertical gap:lg">
+      <cds-form-group layout="horizontal">
 
-        <cds-input layout="vertical" bchFormGroup>
+        <cds-input layout="horizontal" bchFormGroup>
           <label>Type</label>
           <input placeholder="e.g. Eppendorf tube" formControlName="type" bchFormControl/>
-          <cds-control-message>message text</cds-control-message>
+          <cds-control-message *bchIfNoError>message text</cds-control-message>
           <cds-control-message status="error" *bchIfError="'required';controlName: 'type'">
-            message text
+            Type is required
           </cds-control-message>
         </cds-input>
 
-        <cds-input-group layout="vertical">
+        <cds-input-group layout="horizontal" bchFormGroup>
           <label>Volume</label>
           <cds-input>
             <label>Volume</label>
-            <input placeholder="e.g. 100" type="number" formControlName="volume"/>
+            <input placeholder="e.g. 100" type="number" formControlName="volume" bchFormControl/>
           </cds-input>
           <cds-select cds-layout="align:shrink">
             <label>Unit</label>
-            <select>
+            <select bchFormControl formControlName="unit">
               <option>ml</option>
               <option>µL</option>
               <option>L</option>
               <option>m³</option>
             </select>
           </cds-select>
-          <cds-control-message>Maximum host budget for billing period</cds-control-message>
-          <cds-control-message status="error">Maximum host budget for billing period</cds-control-message>
+          <cds-control-message *bchIfNoError>Maximum host budget for billing period</cds-control-message>
+          <cds-control-message status="error" *bchIfError="'required';controlName: 'volume'">
+            Volume is required
+          </cds-control-message>
+          <cds-control-message status="error" *bchIfError="'required';controlName: 'unit'">
+            Unit is required
+          </cds-control-message>
         </cds-input-group>
 
-      </div>
+      </cds-form-group>
     </form>
 
   </div>
