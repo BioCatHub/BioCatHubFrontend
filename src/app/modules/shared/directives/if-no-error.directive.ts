@@ -1,6 +1,6 @@
 import {Directive, OnDestroy, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
-import {FormControlService} from '../services/form-control.service';
 import {Subscription} from 'rxjs';
+import {ControlGroupService} from '../services/control-group.service';
 
 /**
  * Directive for rendering cds control messages depending on the error state of the control group.
@@ -16,7 +16,7 @@ export class IfNoErrorDirective implements OnInit, OnDestroy {
   private hasErrorSubscription: Subscription;
 
   constructor(private templateRef: TemplateRef<any>,
-              private formControlService: FormControlService,
+              private controlGroupService: ControlGroupService,
               private viewContainer: ViewContainerRef) {
   }
 
@@ -26,7 +26,7 @@ export class IfNoErrorDirective implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.createView();
-    this.hasErrorSubscription = this.formControlService.hasError.subscribe(hasError => {
+    this.hasErrorSubscription = this.controlGroupService.hasError.subscribe(hasError => {
       if (hasError) {
         this.destroyView();
       } else {

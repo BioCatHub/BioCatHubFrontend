@@ -1,7 +1,7 @@
 import {Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
 import {NgControl} from '@angular/forms';
-import {FormControlService} from '../services/form-control.service';
 import {Subscription} from 'rxjs';
+import {ControlGroupService} from '../services/control-group.service';
 
 /**
  * Directive for rendering cds control messages depending on the error state of the control. If the specified error
@@ -22,7 +22,7 @@ export class IfErrorDirective implements OnInit, OnDestroy {
   private statusChangesSubscription: Subscription;
 
   constructor(private templateRef: TemplateRef<any>,
-              private formControlService: FormControlService,
+              private controlGroupService: ControlGroupService,
               private viewContainer: ViewContainerRef) {
   }
 
@@ -33,10 +33,10 @@ export class IfErrorDirective implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.destroyView();
-    this.control = this.formControlService.getControl(this.bchIfErrorControlName);
+    this.control = this.controlGroupService.getControl(this.bchIfErrorControlName);
     // When the control becomes touched, we may need to show the error messages
     this.controlElementTouchedChangesSubscription =
-      this.formControlService.controlElementTouchedChanges(this.bchIfErrorControlName).subscribe(touched => {
+      this.controlGroupService.controlElementTouchedChanges(this.bchIfErrorControlName).subscribe(touched => {
         this.touched = touched;
         this.checkStatus();
       });
@@ -68,7 +68,7 @@ export class IfErrorDirective implements OnInit, OnDestroy {
     } else {
       this.destroyView();
     }
-    this.formControlService.onErrorStateChange();
+    this.controlGroupService.onErrorStateChange();
   }
 
   /**

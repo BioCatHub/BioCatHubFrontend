@@ -1,13 +1,13 @@
 import {TestBed} from '@angular/core/testing';
 
-import {FormControlService} from './form-control.service';
+import {ControlGroupService} from './form-control.service';
 
 describe('FormControlService', () => {
-  let service: FormControlService;
+  let service: ControlGroupService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FormControlService);
+    service = TestBed.inject(ControlGroupService);
   });
 
   it('should be created', () => {

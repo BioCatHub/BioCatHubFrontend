@@ -1,4 +1,4 @@
-import {IfNoErrorDirective} from './no-error.directive';
+import {IfNoErrorDirective} from './if-no-error.directive';
 
 describe('IfNoErrorDirective', () => {
   it('should create an instance', () => {

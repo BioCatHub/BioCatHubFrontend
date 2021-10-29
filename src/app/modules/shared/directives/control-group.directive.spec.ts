@@ -1,8 +1,8 @@
-import {FormGroupDirective} from './form-group.directive';
+import {ControlGroupDirective} from './control-group.directive';
 
 describe('FormGroupDirective', () => {
   it('should create an instance', () => {
-    const directive = new FormGroupDirective();
+    const directive = new ControlGroupDirective();
     expect(directive).toBeTruthy();
   });
 });

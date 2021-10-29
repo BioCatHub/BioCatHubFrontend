@@ -1,15 +1,17 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {IfNoErrorDirective} from './directives/if-no-error.directive';
-import {FormGroupDirective} from './directives/form-group.directive';
+import {ControlGroupDirective} from './directives/control-group.directive';
 import {FormControlDirective} from './directives/form-control.directive';
 import {IfErrorDirective} from './directives/if-error.directive';
 
-
+/**
+ * Module that provides shared resources.
+ */
 @NgModule({
   declarations: [
     IfNoErrorDirective,
-    FormGroupDirective,
+    ControlGroupDirective,
     FormControlDirective,
     IfErrorDirective,
   ],
@@ -19,7 +21,7 @@ import {IfErrorDirective} from './directives/if-error.directive';
   exports: [
     IfNoErrorDirective,
     IfErrorDirective,
-    FormGroupDirective,
+    ControlGroupDirective,
     FormControlDirective
   ]
 })

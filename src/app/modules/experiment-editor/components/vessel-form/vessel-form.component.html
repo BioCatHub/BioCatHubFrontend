@@ -6,7 +6,7 @@
     <form [formGroup]="form">
       <cds-form-group layout="horizontal">
 
-        <cds-input layout="horizontal" bchFormGroup>
+        <cds-input layout="horizontal" bchControlGroup>
           <label>Type</label>
           <input placeholder="e.g. Eppendorf tube" formControlName="type" bchFormControl/>
           <cds-control-message *bchIfNoError>message text</cds-control-message>
@@ -15,7 +15,7 @@
           </cds-control-message>
         </cds-input>
 
-        <cds-input-group layout="horizontal" bchFormGroup>
+        <cds-input-group layout="horizontal" bchControlGroup>
           <label>Volume</label>
           <cds-input>
             <label>Volume</label>
