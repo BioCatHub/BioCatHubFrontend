@@ -3,13 +3,12 @@
 <div class="card">
   <div class="card-block">
 
-    <form [formGroup]="form">
+    <form [formGroup]="form" bchForm>
       <cds-form-group layout="horizontal">
 
         <cds-input layout="horizontal" bchControlGroup>
           <label>Type</label>
           <input placeholder="e.g. Eppendorf tube" formControlName="type" bchFormControl/>
-          <cds-control-message *bchIfNoError>message text</cds-control-message>
           <cds-control-message status="error" *bchIfError="'required';controlName: 'type'">
             Type is required
           </cds-control-message>
@@ -30,7 +29,6 @@
               <option>m³</option>
             </select>
           </cds-select>
-          <cds-control-message *bchIfNoError>Maximum host budget for billing period</cds-control-message>
           <cds-control-message status="error" *bchIfError="'required';controlName: 'volume'">
             Volume is required
           </cds-control-message>
@@ -39,21 +37,21 @@
           </cds-control-message>
         </cds-input-group>
 
+        <div formArrayName="attributes" cds-layout="vertical gap:lg">
+          <bch-attribute-input *ngFor="let attribute of attributes().controls; let i=index"
+                               [formControlName]="i"></bch-attribute-input>
+        </div>
+
+        <bch-add-attribute-dropdown [attributeKeys]="['Color', 'Material', 'Weight']"
+                                    (addAttribute)="attributes().push($event)">
+        </bch-add-attribute-dropdown>
+
+
       </cds-form-group>
     </form>
+
 
   </div>
 </div>
 
-
-<!--<clr-input-container>-->
-<!--  <label>Type</label>-->
-<!--  <input clrInput formControlName="type"/>-->
-<!--  <clr-control-error *clrIfError="'required'">Required</clr-control-error>-->
-<!--</clr-input-container>-->
-
-<!--<clr-input-container>-->
-<!--  <label>Volume</label>-->
-<!--  <input clrInput formControlName="volume"/>-->
-<!--  <clr-control-error *clrIfError="'required'">Required</clr-control-error>-->
-<!--</clr-input-container>-->
+<button style="margin-top: 1rem" class="btn btn-primary" (click)="submit()">Submit test</button>

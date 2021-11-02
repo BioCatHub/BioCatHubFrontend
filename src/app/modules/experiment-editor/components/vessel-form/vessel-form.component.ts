@@ -1,7 +1,8 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ExperimentFormService} from '../../services/experiment-form.service';
-import {FormGroup} from '@angular/forms';
-import {ClrForm} from '@clr/angular';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {Attribute} from '../../../../models/attribute';
+import {FormDirective} from '../../../shared/directives/form.directive';
 
 @Component({
   selector: 'bch-vessel-form',
@@ -10,11 +11,12 @@ import {ClrForm} from '@clr/angular';
 })
 export class VesselFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild(ClrForm, {static: true}) clrForm: ClrForm;
+  @ViewChild(FormDirective, {static: true}) formDirective: FormDirective;
 
   public form: FormGroup;
 
   constructor(private experimentFormService: ExperimentFormService,
+              private fb: FormBuilder,
               private cdr: ChangeDetectorRef) {
   }
 
@@ -23,6 +25,11 @@ export class VesselFormComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   ngOnInit(): void {
     this.form = this.experimentFormService.getExperimentFormSubGroup('vessel');
+
+    // TODO
+    this.addAttribute('');
+    this.addAttribute('');
+    this.addAttribute('');
   }
 
   /**
@@ -31,7 +38,7 @@ export class VesselFormComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   ngAfterViewInit() {
     if (this.form.touched) {
-      this.clrForm.markAsTouched();
+      this.formDirective.markAsTouched();
       this.cdr.detectChanges();
     }
   }
@@ -43,6 +50,20 @@ export class VesselFormComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
+  }
+
+  attributes(): FormArray {
+    return this.form.get('attributes') as FormArray;
+  }
+
+  addAttribute(key: string) {
+    const attribute = new Attribute();
+    attribute.key = key;
+    this.attributes().push(this.fb.control(attribute));
+  }
+
+  submit() {
+    this.formDirective.markAsTouched();
   }
 
 }

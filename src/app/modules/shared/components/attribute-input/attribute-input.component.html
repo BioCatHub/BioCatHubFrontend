@@ -1,0 +1,10 @@
+<div cds-layout="horizontal gap:lg align:stretch">
+
+  <input cds-layout="align:shrink" placeholder="Enter attribute name" class="label-input" [(ngModel)]="attribute.key"
+         (ngModelChange)="onChange()"/>
+
+  <input placeholder="Attribute value" cds-layout="align:stretch" [(ngModel)]="attribute.value"
+         (ngModelChange)="onChange()"/>
+
+</div>
+

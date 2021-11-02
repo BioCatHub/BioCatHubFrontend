@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {NgControl} from '@angular/forms';
 import {ControlElement} from '../interfaces/control-element.interface';
 import {Observable, Subject} from 'rxjs';
+import {FormService} from './form.service';
 
 /**
  * Service that manages the error states of a control group.
@@ -13,6 +14,10 @@ export class ControlGroupService {
 
   private controlElements: { [key: string]: ControlElement } = {};
   private hasErrorSubject: Subject<boolean> = new Subject<boolean>();
+
+  constructor(private formService: FormService) {
+    this.formService.addControlGroupService(this);
+  }
 
   /**
    * Adds a new control element to the service.
@@ -62,6 +67,16 @@ export class ControlGroupService {
    */
   public get hasError(): Observable<boolean> {
     return this.hasErrorSubject.asObservable();
+  }
+
+  /**
+   * Maks all control elements in the group as touched.
+   */
+  public markAsTouched() {
+    Object.values(this.controlElements).map(controlElement => {
+      controlElement.control.control?.markAllAsTouched();
+      controlElement.touchedChangedSubject.next(true);
+    });
   }
 
 }

@@ -34,6 +34,7 @@ export class ExperimentFormService {
         type: ['', [Validators.required]],
         volume: ['', [Validators.required]], // TODO validate number
         unit: ['', [Validators.required]],
+        attributes: this.fb.array([])
       })
     });
   }

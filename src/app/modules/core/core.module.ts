@@ -8,6 +8,13 @@ import {ClarityModule} from '@clr/angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavigationComponent} from './navigation/navigation.component';
 import {LandingComponent} from './components/landing/landing.component';
+import {angleIcon, ClarityIcons, plusIcon} from '@cds/core/icon';
+
+
+ClarityIcons.addIcons(
+  angleIcon,
+  plusIcon,
+);
 
 /**
  * Core module. Imports main modules and the core router module.
