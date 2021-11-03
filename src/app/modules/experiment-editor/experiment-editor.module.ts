@@ -13,6 +13,7 @@ import {ClarityModule} from '@clr/angular';
 import {CdsModule} from '@cds/angular';
 import {TimelineStepStateDirective} from './util/timeline-step-state.directive';
 import {SharedModule} from '../shared/shared.module';
+import {ExperimentEditorNavButtonsComponent} from './components/experiment-editor-nav-buttons/experiment-editor-nav-buttons.component';
 
 /**
  * Module that contains the experiment editor.
@@ -25,7 +26,8 @@ import {SharedModule} from '../shared/shared.module';
     ReactantsFormComponent,
     BiocatalystFormComponent,
     VesselFormComponent,
-    TimelineStepStateDirective
+    TimelineStepStateDirective,
+    ExperimentEditorNavButtonsComponent
   ],
   imports: [
     CommonModule,

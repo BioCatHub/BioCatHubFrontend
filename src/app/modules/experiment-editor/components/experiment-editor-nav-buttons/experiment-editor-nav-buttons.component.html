@@ -1,0 +1,10 @@
+<div cds-layout="horizontal gap:md align:vertical-stretch p-t:md">
+  <cds-button action="flat" cds-layout="align:left" [routerLink]="routePrevious" [disabled]="routePrevious === null">
+    <cds-icon shape="angle" direction="left"></cds-icon>
+    previous
+  </cds-button>
+  <cds-button action="flat" cds-layout="align:right" [routerLink]="routeNext" [disabled]="routeNext === null">
+    next
+    <cds-icon shape="angle" direction="right"></cds-icon>
+  </cds-button>
+</div>

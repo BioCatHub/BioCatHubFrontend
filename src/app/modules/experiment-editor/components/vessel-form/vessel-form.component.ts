@@ -1,7 +1,6 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {Attribute} from '../../../../models/attribute';
 import {FormDirective} from '../../../shared/directives/form.directive';
 
 @Component({
@@ -14,6 +13,7 @@ export class VesselFormComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(FormDirective, {static: true}) formDirective: FormDirective;
 
   public form: FormGroup;
+  public units = ['ml', 'µL', 'L', 'm³'];
 
   constructor(private experimentFormService: ExperimentFormService,
               private fb: FormBuilder,
@@ -25,11 +25,6 @@ export class VesselFormComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   ngOnInit(): void {
     this.form = this.experimentFormService.getExperimentFormSubGroup('vessel');
-
-    // TODO
-    this.addAttribute('');
-    this.addAttribute('');
-    this.addAttribute('');
   }
 
   /**
@@ -52,22 +47,20 @@ export class VesselFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.form.updateValueAndValidity();
   }
 
+  /**
+   * Returns the attributes form array.
+   */
   attributes(): FormArray {
     return this.form.get('attributes') as FormArray;
   }
 
-  addAttribute(key: string) {
-    const attribute = new Attribute();
-    attribute.key = key;
-    this.attributes().push(this.fb.control(attribute));
-  }
-
+  /**
+   * Removes the attribute with the given index.
+   *
+   * @param i Index to remove the attribute at.
+   */
   removeAttribute(i: number) {
     (this.form.get('attributes') as FormArray).removeAt(i);
-  }
-
-  submit() {
-    this.formDirective.markAsTouched();
   }
 
 }

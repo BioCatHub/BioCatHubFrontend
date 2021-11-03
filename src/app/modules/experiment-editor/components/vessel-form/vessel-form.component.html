@@ -23,10 +23,7 @@
           <cds-select cds-layout="align:shrink">
             <label>Unit</label>
             <select bchFormControl formControlName="unit">
-              <option>ml</option>
-              <option>µL</option>
-              <option>L</option>
-              <option>m³</option>
+              <option [ngValue]="unit" *ngFor="let unit of units">{{unit}}</option>
             </select>
           </cds-select>
           <cds-control-message status="error" *bchIfError="'required';controlName: 'volume'">
@@ -51,8 +48,7 @@
       </cds-form-group>
     </form>
 
-
   </div>
 </div>
 
-<button style="margin-top: 1rem" class="btn btn-primary" (click)="submit()">Submit test</button>
+<bch-experiment-editor-nav-buttons [routeNext]="'../biocatalyst'"></bch-experiment-editor-nav-buttons>
