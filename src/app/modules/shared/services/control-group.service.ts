@@ -14,6 +14,7 @@ export class ControlGroupService {
 
   private controlElements: { [key: string]: ControlElement } = {};
   private hasErrorSubject: Subject<boolean> = new Subject<boolean>();
+  private hasErrorAndIsTouchedSubject: Subject<boolean> = new Subject<boolean>();
 
   constructor(private formService: FormService) {
     this.formService.addControlGroupService(this);
@@ -56,10 +57,13 @@ export class ControlGroupService {
    */
   public onErrorStateChange() {
     let hasError = false;
+    let isTouched = false;
     Object.values(this.controlElements).map(controlElement => {
       hasError = hasError || !!controlElement.control.invalid;
+      isTouched = isTouched || !!controlElement.control.touched;
     });
     this.hasErrorSubject.next(hasError);
+    this.hasErrorAndIsTouchedSubject.next(hasError && isTouched);
   }
 
   /**
@@ -67,6 +71,13 @@ export class ControlGroupService {
    */
   public get hasError(): Observable<boolean> {
     return this.hasErrorSubject.asObservable();
+  }
+
+  /**
+   * Returns the hasErrorAndIsTouched Observable which emits the current combined error/touched state.
+   */
+  public hasErrorAndIsTouched(): Observable<boolean> {
+    return this.hasErrorAndIsTouchedSubject.asObservable();
   }
 
   /**

@@ -1,6 +1,6 @@
-import {Directive, ElementRef} from '@angular/core';
+import {Directive, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {NgControl} from '@angular/forms';
-import {fromEvent, Subject} from 'rxjs';
+import {fromEvent, Subject, Subscription} from 'rxjs';
 import {ControlGroupService} from '../services/control-group.service';
 
 /**
@@ -10,14 +10,23 @@ import {ControlGroupService} from '../services/control-group.service';
 @Directive({
   selector: '[bchFormControl]'
 })
-export class FormControlDirective {
+export class FormControlDirective implements OnInit, OnDestroy {
+
+  private fromEventSubscription: Subscription;
 
   constructor(private ngControl: NgControl,
               private el: ElementRef,
               private controlGroupService: ControlGroupService) {
+  }
+
+  /**
+   * Register the control element. on the ControlGroupService.
+   */
+  ngOnInit() {
     // Create an Observable that emits on blur events and when manually triggered
     const touchedChangedSubject = new Subject<boolean>();
-    fromEvent(this.el.nativeElement, 'blur').subscribe(() => touchedChangedSubject.next(true));
+    this.fromEventSubscription = fromEvent(this.el.nativeElement, 'blur')
+      .subscribe(() => touchedChangedSubject.next(true));
     const touchedChanged = touchedChangedSubject.asObservable();
     // Register control on the ControlGroupService
     this.controlGroupService.registerControlElement({
@@ -26,6 +35,13 @@ export class FormControlDirective {
       touchedChangedSubject,
       name: this.ngControl.name
     });
+  }
+
+  /**
+   * Unsubscribes from Observables.
+   */
+  ngOnDestroy() {
+    this.fromEventSubscription.unsubscribe();
   }
 
 }

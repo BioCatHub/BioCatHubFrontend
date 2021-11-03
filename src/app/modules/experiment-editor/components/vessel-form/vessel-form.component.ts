@@ -62,6 +62,10 @@ export class VesselFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.attributes().push(this.fb.control(attribute));
   }
 
+  removeAttribute(i: number) {
+    (this.form.get('attributes') as FormArray).removeAt(i);
+  }
+
   submit() {
     this.formDirective.markAsTouched();
   }

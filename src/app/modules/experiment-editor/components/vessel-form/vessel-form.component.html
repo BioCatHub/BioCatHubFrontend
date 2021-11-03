@@ -39,6 +39,7 @@
 
         <div formArrayName="attributes" cds-layout="vertical gap:lg">
           <bch-attribute-input *ngFor="let attribute of attributes().controls; let i=index"
+                               (removeAttribute)="removeAttribute(i)"
                                [formControlName]="i"></bch-attribute-input>
         </div>
 

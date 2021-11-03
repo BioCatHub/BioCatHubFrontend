@@ -1,7 +1,12 @@
-import {Component, forwardRef, Injector, OnInit} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Injector, OnInit, Output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
 import {Attribute} from '../../../../models/attribute';
 
+/**
+ * Form component for attributes.
+ *
+ * NOTE: Currently not implemented: indication of disabled state, as it's not yet needed in BCH.
+ */
 @Component({
   selector: 'bch-attribute-input',
   templateUrl: './attribute-input.component.html',
@@ -15,6 +20,11 @@ import {Attribute} from '../../../../models/attribute';
   ],
 })
 export class AttributeInputComponent implements OnInit, ControlValueAccessor {
+
+  /**
+   * Emits when the attribute should get removed.
+   */
+  @Output() removeAttribute: EventEmitter<any> = new EventEmitter<any>();
 
   public attribute: Attribute;
   public isDisabled = false;
@@ -53,12 +63,12 @@ export class AttributeInputComponent implements OnInit, ControlValueAccessor {
   };
 
   /**
-   * Used by the formControl to write a value to the native formControl or any custom value. todo
+   * Sets the value.
    *
-   * @param obj: Value to write.
+   * @param attribute: Attribute to write.
    */
-  writeValue(obj: Attribute): void {
-    this.attribute = obj;
+  writeValue(attribute: Attribute): void {
+    this.attribute = attribute;
   }
 
   /**

@@ -1,10 +1,33 @@
 <div cds-layout="horizontal gap:lg align:stretch">
 
-  <input cds-layout="align:shrink" placeholder="Enter attribute name" class="label-input" [(ngModel)]="attribute.key"
-         (ngModelChange)="onChange()"/>
+  <div cds-layout="align:shrink" bchControlGroup>
+    <div class="input-container label-input-container" cds-layout="horizontal gap:sm align:horizontal-stretch">
+      <input placeholder="Enter attribute name" class="label-input" [(ngModel)]="attribute.key"
+             (ngModelChange)="onChange()" bchFormControl required name="attributeKey"/>
+      <div cds-layout="align:shrink align:vertical-center" class="form-error-icon">
+        <cds-icon status="danger" shape="exclamation-circle" class="error-icon" inner-offset="4"></cds-icon>
+      </div>
+    </div>
+    <cds-control-message status="error" cds-layout="p-t:sm" *bchIfError="'required';controlName: 'attributeKey'">
+      Attribute name is required
+    </cds-control-message>
+  </div>
 
-  <input placeholder="Attribute value" cds-layout="align:stretch" [(ngModel)]="attribute.value"
-         (ngModelChange)="onChange()"/>
+  <div cds-layout="align:stretch" bchControlGroup>
+    <div class="input-container" cds-layout="horizontal gap:sm align:horizontal-stretch">
+      <input placeholder="Attribute value" [(ngModel)]="attribute.value" bchFormControl required name="attributeValue"
+             (ngModelChange)="onChange()"/>
+      <div cds-layout="align:shrink align:vertical-center" class="form-error-icon">
+        <cds-icon status="danger" shape="exclamation-circle" class="error-icon" inner-offset="4"></cds-icon>
+      </div>
+      <div cds-layout="align:shrink align:vertical-center" class="icon-button" (click)="removeAttribute.emit()">
+        <cds-icon shape="trash"></cds-icon>
+      </div>
+    </div>
+    <cds-control-message status="error" cds-layout="p-t:sm" *bchIfError="'required';controlName: 'attributeValue'">
+      Attribute value is required
+    </cds-control-message>
+  </div>
 
 </div>
 
