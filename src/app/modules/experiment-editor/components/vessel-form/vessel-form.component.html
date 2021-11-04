@@ -3,7 +3,11 @@
 <div class="card">
   <div class="card-block">
 
-    <form [formGroup]="form" bchForm>
+    <div class="progress top">
+      <progress [bchFormProgress]="form"></progress>
+    </div>
+
+    <form [formGroup]="form" bchForm cds-layout="p-t:md">
       <cds-form-group layout="horizontal">
 
         <cds-input layout="horizontal" bchControlGroup>

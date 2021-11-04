@@ -14,6 +14,7 @@ import {CdsModule} from '@cds/angular';
 import {TimelineStepStateDirective} from './util/timeline-step-state.directive';
 import {SharedModule} from '../shared/shared.module';
 import {ExperimentEditorNavButtonsComponent} from './components/experiment-editor-nav-buttons/experiment-editor-nav-buttons.component';
+import {FormProgressDirective} from './directives/form-progress.directive';
 
 /**
  * Module that contains the experiment editor.
@@ -27,7 +28,8 @@ import {ExperimentEditorNavButtonsComponent} from './components/experiment-edito
     BiocatalystFormComponent,
     VesselFormComponent,
     TimelineStepStateDirective,
-    ExperimentEditorNavButtonsComponent
+    ExperimentEditorNavButtonsComponent,
+    FormProgressDirective
   ],
   imports: [
     CommonModule,
