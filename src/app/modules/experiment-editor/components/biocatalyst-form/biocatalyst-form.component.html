@@ -1,9 +1,103 @@
-<form clrForm clrLayout="horizontal" [formGroup]="form">
+<!--<form clrForm clrLayout="horizontal" [formGroup]="form">-->
 
-  <clr-input-container>
-    <label>Biocatalyst form test</label>
-    <input clrInput formControlName="test"/>
-    <clr-control-error *clrIfError="'required'">Required</clr-control-error>
-  </clr-input-container>
+<!--  <clr-input-container>-->
+<!--    <label>Biocatalyst form test</label>-->
+<!--    <input clrInput formControlName="test"/>-->
+<!--    <clr-control-error *clrIfError="'required'">Required</clr-control-error>-->
+<!--  </clr-input-container>-->
 
-</form>
+<!--</form>-->
+
+<cds-button (click)="addEnzyme()">Add Enzyme</cds-button>
+
+<clr-datagrid>
+  <clr-dg-column>Name</clr-dg-column>
+  <clr-dg-column>Type</clr-dg-column>
+  <clr-dg-column>Organism</clr-dg-column>
+  <clr-dg-column>Concentration</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let enzyme of enzymes().controls" [clrDgItem]="enzyme">
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="enzyme.get('name').value"></bch-optional-parameter>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="enzyme.get('type').value"></bch-optional-parameter>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="enzyme.get('organism').value"></bch-optional-parameter>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="enzyme.get('concentration').value"></bch-optional-parameter>
+      {{enzyme.get('unit').value}}
+    </clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-detail *clrIfDetail="detailEnzyme">
+    <clr-dg-detail-header>Edit enzyme</clr-dg-detail-header>
+
+    <form [formGroup]="detailEnzyme" bchForm cds-layout="p:lg">
+      <cds-form-group layout="horizontal">
+
+        <cds-input layout="horizontal" bchControlGroup>
+          <label>Name</label>
+          <input placeholder="e.g. Alcohol dehydrogenase" formControlName="name" bchFormControl/>
+          <cds-control-message status="error" *bchIfError="'required';controlName: 'name'">
+            Name is required
+          </cds-control-message>
+        </cds-input>
+
+        <cds-input-group layout="horizontal" bchControlGroup>
+          <label>Host organism</label>
+          <cds-input layout="horizontal" bchControlGroup>
+            <label>Host organism</label>
+            <input placeholder="e.g. E.coli" formControlName="organism" bchFormControl/>
+          </cds-input>
+          <cds-select cds-layout="align:shrink">
+            <label>Wildtype or Variant</label>
+            <select formControlName="type">
+              <option [ngValue]="'Wildtype'" selected>Wildtype</option>
+              <option [ngValue]="'Variant'">Variant</option>
+            </select>
+          </cds-select>
+        </cds-input-group>
+
+        <cds-input layout="horizontal" bchControlGroup>
+          <label>Variant</label>
+          <input formControlName="variant" bchFormControl/>
+        </cds-input>
+
+        <cds-textarea layout="horizontal" bchControlGroup>
+          <label>Amino acid sequence</label>
+          <textarea formControlName="organism" bchFormControl></textarea>
+        </cds-textarea>
+
+        <cds-input-group layout="horizontal" bchControlGroup>
+          <label>Concentration</label>
+          <cds-input>
+            <label>Concentration</label>
+            <input placeholder="e.g. 100" type="number" formControlName="concentration" bchFormControl/>
+          </cds-input>
+          <cds-select cds-layout="align:shrink">
+            <label>Unit</label>
+            <select bchFormControl formControlName="unit">
+              <option [ngValue]="unit" *ngFor="let unit of units">{{unit}}</option>
+            </select>
+          </cds-select>
+        </cds-input-group>
+
+        <div formArrayName="others" cds-layout="vertical gap:lg">
+          <bch-attribute-input *ngFor="let attribute of others(detailEnzyme).controls; let i=index"
+                               (removeAttribute)="removeAttribute(i, detailEnzyme)"
+                               [formControlName]="i"></bch-attribute-input>
+        </div>
+
+        <bch-add-attribute-dropdown [attributeKeys]="['Bradford', 'BCA']"
+                                    (addAttribute)="others(detailEnzyme).push($event)">
+        </bch-add-attribute-dropdown>
+
+      </cds-form-group>
+    </form>
+
+  </clr-dg-detail>
+
+</clr-datagrid>

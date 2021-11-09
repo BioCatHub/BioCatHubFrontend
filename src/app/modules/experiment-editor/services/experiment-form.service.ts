@@ -19,7 +19,7 @@ export class ExperimentFormService {
   buildForm() {
     this._experimentForm = this.fb.group({
       biocatalyst: this.fb.group({
-        test: ['', [Validators.required]]
+        enzymes: this.fb.array([])
       }),
       conditions: this.fb.group({
         test: ['', [Validators.required]]

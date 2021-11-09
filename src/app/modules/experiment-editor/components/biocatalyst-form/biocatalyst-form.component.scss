@@ -1,0 +1,12 @@
+bch-biocatalyst-form {
+
+  cds-form-group {
+    --label-width: 200px;
+  }
+
+  // Make dropdown visible
+  .datagrid-outer-wrapper, .datagrid-detail-pane, .datagrid-detail-pane-content {
+    overflow: visible;
+  }
+
+}

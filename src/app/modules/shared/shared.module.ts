@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {AddAttributeDropdownComponent} from './components/add-attribute-dropdown/add-attribute-dropdown.component';
 import {ClarityModule} from '@clr/angular';
 import {FormDirective} from './directives/form.directive';
+import {OptionalParameterComponent} from './components/optional-parameter/optional-parameter.component';
 
 /**
  * Module that provides shared resources.
@@ -23,6 +24,7 @@ import {FormDirective} from './directives/form.directive';
     AttributeInputComponent,
     AddAttributeDropdownComponent,
     FormDirective,
+    OptionalParameterComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import {FormDirective} from './directives/form.directive';
     FormControlDirective,
     AttributeInputComponent,
     AddAttributeDropdownComponent,
-    FormDirective
+    FormDirective,
+    OptionalParameterComponent
   ]
 })
 export class SharedModule {
