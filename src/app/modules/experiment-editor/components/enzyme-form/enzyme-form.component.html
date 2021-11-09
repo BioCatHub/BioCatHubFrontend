@@ -1,0 +1,62 @@
+<form [formGroup]="form" bchForm cds-layout="p:lg">
+  <cds-form-group layout="horizontal">
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>Name</label>
+      <input placeholder="e.g. Alcohol dehydrogenase" formControlName="name" bchFormControl/>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'name'">
+        Name is required
+      </cds-control-message>
+    </cds-input>
+
+    <cds-input-group layout="horizontal" bchControlGroup>
+      <label>Host organism</label>
+      <cds-input layout="horizontal" bchControlGroup>
+        <label>Host organism</label>
+        <input placeholder="e.g. E.coli" formControlName="organism" bchFormControl/>
+      </cds-input>
+      <cds-select cds-layout="align:shrink">
+        <label>Wildtype or Variant</label>
+        <select formControlName="type">
+          <option [ngValue]="'Wildtype'" selected>Wildtype</option>
+          <option [ngValue]="'Variant'">Variant</option>
+        </select>
+      </cds-select>
+    </cds-input-group>
+
+    <cds-input layout="horizontal" bchControlGroup *ngIf="form.get('type')!.value === 'Variant'">
+      <label>Variant</label>
+      <input formControlName="variant" bchFormControl/>
+    </cds-input>
+
+    <cds-textarea layout="horizontal" bchControlGroup>
+      <label>Amino acid sequence</label>
+      <textarea formControlName="organism" bchFormControl></textarea>
+    </cds-textarea>
+
+    <cds-input-group layout="horizontal" bchControlGroup>
+      <label>Concentration</label>
+      <cds-input>
+        <label>Concentration</label>
+        <input placeholder="e.g. 100" type="number" formControlName="concentration" bchFormControl/>
+      </cds-input>
+      <cds-select cds-layout="align:shrink">
+        <label>Unit</label>
+        <select bchFormControl formControlName="unit">
+          <option [ngValue]="unit" *ngFor="let unit of units">{{unit}}</option>
+        </select>
+      </cds-select>
+    </cds-input-group>
+
+    <div formArrayName="others" cds-layout="vertical gap:lg">
+      <bch-attribute-input *ngFor="let attribute of others(form).controls; let i=index"
+                           (removeAttribute)="removeAttribute(i)"
+                           [formControlName]="i"></bch-attribute-input>
+    </div>
+
+    <bch-add-attribute-dropdown [attributeKeys]="['Bradford', 'BCA']"
+                                (addAttribute)="others(form).push($event)">
+    </bch-add-attribute-dropdown>
+
+  </cds-form-group>
+</form>

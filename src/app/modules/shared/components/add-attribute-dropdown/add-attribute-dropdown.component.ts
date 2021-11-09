@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl} from '@angular/forms';
 import {Attribute} from '../../../../models/attribute';
 
@@ -9,7 +9,8 @@ import {Attribute} from '../../../../models/attribute';
 @Component({
   selector: 'bch-add-attribute-dropdown',
   templateUrl: './add-attribute-dropdown.component.html',
-  styleUrls: ['./add-attribute-dropdown.component.scss']
+  styleUrls: ['./add-attribute-dropdown.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddAttributeDropdownComponent {
 
@@ -29,6 +30,7 @@ export class AddAttributeDropdownComponent {
   /**
    * Emits a FormControl with an Attribute as value via the addAttribute output. The attribute has the given key string
    * as key.
+   *
    * @param key Key of the attribute.
    */
   emitAttribute(key: string) {

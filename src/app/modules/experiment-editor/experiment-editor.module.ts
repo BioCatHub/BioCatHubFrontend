@@ -15,6 +15,7 @@ import {TimelineStepStateDirective} from './util/timeline-step-state.directive';
 import {SharedModule} from '../shared/shared.module';
 import {ExperimentEditorNavButtonsComponent} from './components/experiment-editor-nav-buttons/experiment-editor-nav-buttons.component';
 import {FormProgressDirective} from './directives/form-progress.directive';
+import {EnzymeFormComponent} from './components/enzyme-form/enzyme-form.component';
 
 /**
  * Module that contains the experiment editor.
@@ -29,7 +30,8 @@ import {FormProgressDirective} from './directives/form-progress.directive';
     VesselFormComponent,
     TimelineStepStateDirective,
     ExperimentEditorNavButtonsComponent,
-    FormProgressDirective
+    FormProgressDirective,
+    EnzymeFormComponent
   ],
   imports: [
     CommonModule,

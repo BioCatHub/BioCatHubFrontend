@@ -1,25 +1,16 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
-import {ClrForm} from '@clr/angular';
 
 
-// TODO Handle markAsTouched
 // TODO Add validation
 // TODO Add validation indicators to datagrid
 // TODO Add brenda search
-// TODO conditionally hide variant input
-// TODO add missing documentation
 // TODO try to refactor attribute stuff
 
+/**
+ * Form component for biocatalysts. Offers a datagrid in which you can add different enzymes.
+ */
 @Component({
   selector: 'bch-biocatalyst-form',
   templateUrl: './biocatalyst-form.component.html',
@@ -28,11 +19,9 @@ import {ClrForm} from '@clr/angular';
 })
 export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild(ClrForm, {static: true}) clrForm: ClrForm;
 
   public form: FormGroup;
-  public detailEnzyme: FormGroup;
-  public units = ['ml', 'µL', 'L'];
+  public detailEnzyme: FormGroup | null;
 
 
   constructor(private experimentFormService: ExperimentFormService,
@@ -53,8 +42,8 @@ export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestro
    */
   ngAfterViewInit() {
     if (this.form.touched) {
-      this.clrForm.markAsTouched();
-      this.cdr.detectChanges();
+      // this.formDirective.markAsTouched();
+      // this.cdr.detectChanges();
     }
   }
 
@@ -74,37 +63,31 @@ export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestro
     return this.form.get('enzymes') as FormArray;
   }
 
-  /**
-   * Returns the others form array.
-   */
-  others(formGroup: FormGroup): FormArray {
-    return formGroup.get('others') as FormArray;
-  }
 
+  /**
+   * Adds a new enzyme form group to the array.
+   */
   addEnzyme() {
     const enzymeGroup = this.fb.group({
-      name: [],
+      name: [null, [Validators.required]],
       organism: [],
       variant: [],
-      type: [],
+      type: ['Wildtype'],
       sequence: [],
       concentration: [],
-      unit: [],
+      unit: ['mmol/L'],
       method: [],
       others: this.fb.array([]),
     });
     (this.form.get('enzymes') as FormArray).push(enzymeGroup);
+    this.detailEnzyme = null; // TODO Why is this needed?
+    this.cdr.detectChanges();
     this.detailEnzyme = enzymeGroup;
     this.cdr.detectChanges();
   }
 
-  /**
-   * Removes the attribute with the given index.
-   *
-   * @param i Index to remove the attribute at.
-   */
-  removeAttribute(i: number, formGroup: FormGroup) {
-    (formGroup.get('others') as FormArray).removeAt(i);
+
+  onDetailOpen(event: any) {
   }
 
 }
