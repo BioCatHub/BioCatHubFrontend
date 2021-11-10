@@ -46,7 +46,15 @@ export class ControlGroupService {
    * @param name Name of the control to get.
    */
   public getControl(name: string): NgControl {
-    return this.controlElements[name].control;
+    try {
+      return this.controlElements[name].control;
+    } catch (e) {
+      if (e instanceof TypeError) {
+        throw new Error(`Could not get control with name "${name}"`);
+      } else {
+        throw  e;
+      }
+    }
   }
 
   /**

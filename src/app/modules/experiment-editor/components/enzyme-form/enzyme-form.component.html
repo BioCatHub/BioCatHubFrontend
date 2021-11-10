@@ -11,17 +11,23 @@
 
     <cds-input-group layout="horizontal" bchControlGroup>
       <label>Host organism</label>
-      <cds-input layout="horizontal" bchControlGroup>
+      <cds-input layout="horizontal">
         <label>Host organism</label>
         <input placeholder="e.g. E.coli" formControlName="organism" bchFormControl/>
       </cds-input>
       <cds-select cds-layout="align:shrink">
         <label>Wildtype or Variant</label>
-        <select formControlName="type">
+        <select formControlName="type" bchFormControl>
           <option [ngValue]="'Wildtype'" selected>Wildtype</option>
           <option [ngValue]="'Variant'">Variant</option>
         </select>
       </cds-select>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'organism'">
+        Host organism is required
+      </cds-control-message>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'type'">
+        Type is required
+      </cds-control-message>
     </cds-input-group>
 
     <cds-input layout="horizontal" bchControlGroup *ngIf="form.get('type')!.value === 'Variant'">
@@ -31,7 +37,10 @@
 
     <cds-textarea layout="horizontal" bchControlGroup>
       <label>Amino acid sequence</label>
-      <textarea formControlName="organism" bchFormControl></textarea>
+      <textarea formControlName="sequence" bchFormControl></textarea>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'sequence'">
+        Amino acid sequence is required
+      </cds-control-message>
     </cds-textarea>
 
     <cds-input-group layout="horizontal" bchControlGroup>
@@ -46,6 +55,12 @@
           <option [ngValue]="unit" *ngFor="let unit of units">{{unit}}</option>
         </select>
       </cds-select>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'concentration'">
+        Concentration is required
+      </cds-control-message>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'unit'">
+        Concentration unit is required
+      </cds-control-message>
     </cds-input-group>
 
     <div formArrayName="others" cds-layout="vertical gap:lg">

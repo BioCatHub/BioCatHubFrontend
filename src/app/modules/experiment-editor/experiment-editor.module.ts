@@ -16,6 +16,7 @@ import {SharedModule} from '../shared/shared.module';
 import {ExperimentEditorNavButtonsComponent} from './components/experiment-editor-nav-buttons/experiment-editor-nav-buttons.component';
 import {FormProgressDirective} from './directives/form-progress.directive';
 import {EnzymeFormComponent} from './components/enzyme-form/enzyme-form.component';
+import {EnzymeSearchComponent} from './components/enzyme-search/enzyme-search.component';
 
 /**
  * Module that contains the experiment editor.
@@ -31,7 +32,8 @@ import {EnzymeFormComponent} from './components/enzyme-form/enzyme-form.componen
     TimelineStepStateDirective,
     ExperimentEditorNavButtonsComponent,
     FormProgressDirective,
-    EnzymeFormComponent
+    EnzymeFormComponent,
+    EnzymeSearchComponent
   ],
   imports: [
     CommonModule,

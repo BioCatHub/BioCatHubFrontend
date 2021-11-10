@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavigationComponent} from './navigation/navigation.component';
 import {LandingComponent} from './components/landing/landing.component';
 import {angleIcon, ClarityIcons, plusIcon, trashIcon} from '@cds/core/icon';
+import {HttpClientModule} from '@angular/common/http';
 
 
 ClarityIcons.addIcons(
@@ -31,6 +32,7 @@ ClarityIcons.addIcons(
     CoreRoutingModule,
     CdsModule,
     ClarityModule,
+    HttpClientModule,
     BrowserAnimationsModule
   ],
   providers: [],

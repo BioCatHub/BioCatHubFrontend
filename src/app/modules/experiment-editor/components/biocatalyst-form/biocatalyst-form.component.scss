@@ -9,4 +9,9 @@ bch-biocatalyst-form {
     overflow: visible;
   }
 
+  .datagrid-cell {
+    display: flex;
+    align-items: center;
+  }
+
 }

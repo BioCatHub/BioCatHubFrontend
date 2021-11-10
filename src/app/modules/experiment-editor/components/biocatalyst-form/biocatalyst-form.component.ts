@@ -1,12 +1,11 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
+import {Enzyme} from '../../../../models/enzyme';
 
-
-// TODO Add validation
-// TODO Add validation indicators to datagrid
-// TODO Add brenda search
+// TODO add progress bars
 // TODO try to refactor attribute stuff
+// TODO Add missing documentation & refactor stuff
 
 /**
  * Form component for biocatalysts. Offers a datagrid in which you can add different enzymes.
@@ -42,7 +41,7 @@ export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestro
    */
   ngAfterViewInit() {
     if (this.form.touched) {
-      // this.formDirective.markAsTouched();
+      // this.formDirective.markAsTouched(); todo
       // this.cdr.detectChanges();
     }
   }
@@ -70,14 +69,15 @@ export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestro
   addEnzyme() {
     const enzymeGroup = this.fb.group({
       name: [null, [Validators.required]],
-      organism: [],
+      organism: [null, [Validators.required]],
       variant: [],
-      type: ['Wildtype'],
-      sequence: [],
-      concentration: [],
-      unit: ['mmol/L'],
+      type: ['Wildtype', [Validators.required]],
+      sequence: [null, [Validators.required]],
+      concentration: [null, [Validators.required]], // TODO number validator
+      unit: ['mmol/L', [Validators.required]],
       method: [],
       others: this.fb.array([]),
+      ecNumber: [],
     });
     (this.form.get('enzymes') as FormArray).push(enzymeGroup);
     this.detailEnzyme = null; // TODO Why is this needed?
@@ -87,7 +87,33 @@ export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestro
   }
 
 
-  onDetailOpen(event: any) {
+  selectEnzymeFromSearch(enzyme: Enzyme) {
+    this.detailEnzyme?.get('name')?.setValue(enzyme.name);
+    this.detailEnzyme?.get('ecNumber')?.setValue(enzyme.ecNumber);
+    this.detailEnzyme?.get('organism')?.setValue(null);
+    this.detailEnzyme?.get('variant')?.setValue(null);
+    this.detailEnzyme?.get('type')?.setValue('Wildtype');
+    this.detailEnzyme?.get('sequence')?.setValue(null);
+    this.detailEnzyme?.get('concentration')?.setValue(null);
+    this.detailEnzyme?.get('unit')?.setValue('mmol/L');
+    this.detailEnzyme?.get('method')?.setValue(null);
+    (this.detailEnzyme?.get('others') as FormArray).clear();
+  }
+
+  /**
+   * Deletes the enzyme from the form array.
+   * TODO raises an experssionhaschanged error
+   * TODO style button
+   *
+   * @param enzyme Enzyme to delete.
+   */
+  deleteEnzyme(enzyme: FormGroup) {
+    for (let i = 0; i < this.enzymes().length; i++) {
+      if (this.enzymes().at(i) === enzyme) {
+        this.enzymes().removeAt(i);
+        break;
+      }
+    }
   }
 
 }

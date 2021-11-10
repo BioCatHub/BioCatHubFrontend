@@ -33,6 +33,7 @@ export class EnzymeFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.form.markAllAsTouched();
+    this.form.parent?.markAsTouched();
   }
 
   /**

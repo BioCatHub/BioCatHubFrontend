@@ -5,6 +5,11 @@
   <clr-dg-column>Type</clr-dg-column>
   <clr-dg-column>Organism</clr-dg-column>
   <clr-dg-column>Concentration</clr-dg-column>
+  <clr-dg-column>
+    <ng-container *clrDgHideableColumn="{hidden: !(form.invalid && form.touched)}">
+      Form status
+    </ng-container>
+  </clr-dg-column>
 
   <clr-dg-row *clrDgItems="let enzyme of enzymes().controls" [clrDgItem]="enzyme">
     <clr-dg-cell>
@@ -20,13 +25,22 @@
       <bch-optional-parameter [parameter]="enzyme.get('concentration').value"></bch-optional-parameter>
       {{enzyme.get('unit').value}}
     </clr-dg-cell>
+    <clr-dg-cell>
+      <cds-alert-group type="light" size="sm">
+        <cds-alert status="danger" *ngIf="enzyme.invalid">Enzyme form contains errors</cds-alert>
+        <cds-alert status="success" *ngIf="enzyme.valid">Enzyme form contains no errors</cds-alert>
+      </cds-alert-group>
+    </clr-dg-cell>
   </clr-dg-row>
 
-  <ng-template [(clrIfDetail)]="detailEnzyme" let-detail (clrIfDetailChange)="onDetailOpen($event)">
+  <clr-dg-placeholder>No enzymes added yet</clr-dg-placeholder>
 
+  <ng-template [(clrIfDetail)]="detailEnzyme" let-detail>
     <clr-dg-detail>
       <clr-dg-detail-header>Edit enzyme</clr-dg-detail-header>
+      <bch-enzyme-search cds-layout="p:lg" (selectEnzyme)="selectEnzymeFromSearch($event)"></bch-enzyme-search>
       <bch-enzyme-form [form]="detail"></bch-enzyme-form>
+      <cds-button (click)="deleteEnzyme(detail)">Delete enzyme</cds-button>
     </clr-dg-detail>
   </ng-template>
 
