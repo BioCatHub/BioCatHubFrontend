@@ -63,7 +63,7 @@ export class IfErrorDirective implements OnInit, OnDestroy {
    * control messages accordingly.
    */
   checkStatus() {
-    if (this.control.invalid && this.touched) {
+    if (this.control.invalid && this.touched && this.control.errors !== null && this.bchIfError in this.control.errors) {
       this.createView();
     } else {
       this.destroyView();

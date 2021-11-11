@@ -3,6 +3,9 @@ import {ExperimentFormService} from '../../services/experiment-form.service';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {FormDirective} from '../../../shared/directives/form.directive';
 
+/**
+ * Form component for experiment vessels.
+ */
 @Component({
   selector: 'bch-vessel-form',
   templateUrl: './vessel-form.component.html',

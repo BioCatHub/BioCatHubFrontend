@@ -8,14 +8,15 @@ import {Attribute} from '../../../models/attribute';
  * controls in relation to the total controls.
  */
 @Directive({
-  selector: '[bchFormProgress]'
+  selector: '[bchFormProgress]',
+  exportAs: 'formProgress'
 })
 export class FormProgressDirective implements OnInit, OnDestroy {
 
   @Input() bchFormProgress: FormGroup;
 
-  private value = 0;
-  private max = 0;
+  public value = 0;
+  public max = 0;
   private valueChangesSubscription: Subscription;
 
   constructor(private el: ElementRef) {
@@ -95,7 +96,7 @@ export class FormProgressDirective implements OnInit, OnDestroy {
 
   /**
    * Checks a form control. The max count is incremented by one for every input. If the input is valid, the
-   * value count is also increased. Special values like Attributes are seperatly checked as they may have more then
+   * value count is also increased. Special values like Attributes are separately checked as they may have more then
    * one input.
    *
    * @param control Control to check.
@@ -109,7 +110,7 @@ export class FormProgressDirective implements OnInit, OnDestroy {
       if (control.value.value) {
         this.value += 1;
       }
-    } else {
+    } else if (control.validator !== null) {
       this.max += 1;
       if (control.valid) {
         this.value += 1;

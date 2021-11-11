@@ -1,11 +1,8 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {Enzyme} from '../../../../models/enzyme';
-
-// TODO add progress bars
-// TODO try to refactor attribute stuff
-// TODO Add missing documentation & refactor stuff
+import {floatValidator} from '../../../../utility/validators/float.validator';
 
 /**
  * Form component for biocatalysts. Offers a datagrid in which you can add different enzymes.
@@ -16,12 +13,10 @@ import {Enzyme} from '../../../../models/enzyme';
   styleUrls: ['./biocatalyst-form.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class BiocatalystFormComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
-  public detailEnzyme: FormGroup | null;
-
+  public detailEnzyme: FormGroup | null = null;
 
   constructor(private experimentFormService: ExperimentFormService,
               private fb: FormBuilder,
@@ -33,17 +28,6 @@ export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestro
    */
   ngOnInit(): void {
     this.form = this.experimentFormService.getExperimentFormSubGroup('biocatalyst');
-  }
-
-  /**
-   * When the form is rendered at least the second time, it's form control statuses can be touched and invalid.
-   * In this case we need to mark the UI as touched.
-   */
-  ngAfterViewInit() {
-    if (this.form.touched) {
-      // this.formDirective.markAsTouched(); todo
-      // this.cdr.detectChanges();
-    }
   }
 
   /**
@@ -71,22 +55,28 @@ export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestro
       name: [null, [Validators.required]],
       organism: [null, [Validators.required]],
       variant: [],
-      type: ['Wildtype', [Validators.required]],
+      type: ['Wildtype'],
       sequence: [null, [Validators.required]],
-      concentration: [null, [Validators.required]], // TODO number validator
-      unit: ['mmol/L', [Validators.required]],
+      concentration: [null, [Validators.required, floatValidator()]],
+      unit: ['mmol/L'],
       method: [],
       others: this.fb.array([]),
       ecNumber: [],
     });
     (this.form.get('enzymes') as FormArray).push(enzymeGroup);
-    this.detailEnzyme = null; // TODO Why is this needed?
+    // I'm not sure why this additional CDR is needed. But it doesn't render correctly without.
+    this.detailEnzyme = null;
     this.cdr.detectChanges();
     this.detailEnzyme = enzymeGroup;
     this.cdr.detectChanges();
   }
 
-
+  /**
+   * Adds the values from the selected enzyme from the search to the form.
+   * Only name and EC number are provided, type and unit take default values.
+   *
+   * @param enzyme Enzyme to take values from.
+   */
   selectEnzymeFromSearch(enzyme: Enzyme) {
     this.detailEnzyme?.get('name')?.setValue(enzyme.name);
     this.detailEnzyme?.get('ecNumber')?.setValue(enzyme.ecNumber);
@@ -102,7 +92,6 @@ export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestro
 
   /**
    * Deletes the enzyme from the form array.
-   * TODO raises an experssionhaschanged error
    *
    * @param enzyme Enzyme to delete.
    */
@@ -110,6 +99,7 @@ export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestro
     for (let i = 0; i < this.enzymes().length; i++) {
       if (this.enzymes().at(i) === enzyme) {
         this.enzymes().removeAt(i);
+        this.cdr.detectChanges();
         break;
       }
     }

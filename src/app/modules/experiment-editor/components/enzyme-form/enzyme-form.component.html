@@ -25,9 +25,6 @@
       <cds-control-message status="error" *bchIfError="'required';controlName: 'organism'">
         Host organism is required
       </cds-control-message>
-      <cds-control-message status="error" *bchIfError="'required';controlName: 'type'">
-        Type is required
-      </cds-control-message>
     </cds-input-group>
 
     <cds-input layout="horizontal" bchControlGroup *ngIf="form.get('type')!.value === 'Variant'">
@@ -47,7 +44,7 @@
       <label>Concentration</label>
       <cds-input>
         <label>Concentration</label>
-        <input placeholder="e.g. 100" type="number" formControlName="concentration" bchFormControl/>
+        <input placeholder="e.g. 100" formControlName="concentration" bchFormControl/>
       </cds-input>
       <cds-select cds-layout="align:shrink">
         <label>Unit</label>
@@ -58,8 +55,8 @@
       <cds-control-message status="error" *bchIfError="'required';controlName: 'concentration'">
         Concentration is required
       </cds-control-message>
-      <cds-control-message status="error" *bchIfError="'required';controlName: 'unit'">
-        Concentration unit is required
+      <cds-control-message status="error" *bchIfError="'float';controlName: 'concentration'">
+        Concentration needs to be given as valid floating point number
       </cds-control-message>
     </cds-input-group>
 

@@ -1,29 +1,29 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {FormDirective} from '../../../shared/directives/form.directive';
 
+/**
+ * Form component for editing an enzyme.
+ */
 @Component({
   selector: 'bch-enzyme-form',
   templateUrl: './enzyme-form.component.html',
   styleUrls: ['./enzyme-form.component.scss']
 })
-export class EnzymeFormComponent implements OnInit, AfterViewInit, OnDestroy {
+export class EnzymeFormComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild(FormDirective, {static: true}) formDirective: FormDirective;
 
   @Input() form: FormGroup;
 
-
   public units = ['mmol/L', 'mg/L', 'ml'];
-
 
   constructor(private cdr: ChangeDetectorRef) {
   }
 
-  ngOnInit(): void {
-
-  }
-
+  /**
+   * Handles form validation after the component is rendered.
+   */
   ngAfterViewInit() {
     if (this.form.touched) {
       this.formDirective.markAsTouched();
@@ -31,6 +31,9 @@ export class EnzymeFormComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  /**
+   * Marks the form as touched after the form is closed (= component is destroyed).
+   */
   ngOnDestroy() {
     this.form.markAllAsTouched();
     this.form.parent?.markAsTouched();

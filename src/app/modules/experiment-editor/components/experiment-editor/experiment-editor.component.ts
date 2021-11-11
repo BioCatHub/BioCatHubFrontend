@@ -42,10 +42,6 @@ export class ExperimentEditorComponent implements AfterViewInit {
   constructor(private cdr: ChangeDetectorRef) {
   }
 
-  submitForm() {
-    // TODO write formmodel in experiment model and send to server
-  }
-
   /**
    * Run one additional change detection cycle after the timeline initialized. This is needed, as the initial step
    * gets the information about it being the current step only after the view was initialized.

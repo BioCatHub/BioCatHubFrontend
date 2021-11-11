@@ -6,7 +6,7 @@
   <clr-dg-column>Organism</clr-dg-column>
   <clr-dg-column>Concentration</clr-dg-column>
   <clr-dg-column>
-    <ng-container *clrDgHideableColumn="{hidden: !(form.invalid && form.touched)}">
+    <ng-container *clrDgHideableColumn="{hidden: !(form.invalid && form.touched) || detailEnzyme !== null}">
       Form status
     </ng-container>
   </clr-dg-column>
@@ -35,13 +35,17 @@
 
   <clr-dg-placeholder>No enzymes added yet</clr-dg-placeholder>
 
-  <ng-template [(clrIfDetail)]="detailEnzyme" let-detail>
+  <ng-template [(clrIfDetail)]="detailEnzyme">
     <clr-dg-detail>
       <clr-dg-detail-header>Edit enzyme</clr-dg-detail-header>
+      <clr-progress-bar class="detail-progress" [bchFormProgress]="detailEnzyme"
+                        #fp=formProgress [clrMax]="fp.max" [clrValue]="fp.value">
+      </clr-progress-bar>
       <bch-enzyme-search cds-layout="p:lg" (selectEnzyme)="selectEnzymeFromSearch($event)"></bch-enzyme-search>
-      <bch-enzyme-form [form]="detail"></bch-enzyme-form>
+      <bch-enzyme-form [form]="detailEnzyme"></bch-enzyme-form>
       <div cds-layout="p-b:lg p-r:lg p-l:lg horizontal align:right">
-        <cds-button action="outline" status="danger" size="sm" (click)="deleteEnzyme(detail)">Delete enzyme</cds-button>
+        <cds-button action="outline" status="danger" size="sm" (click)="deleteEnzyme(detailEnzyme)">Delete enzyme
+        </cds-button>
       </div>
     </clr-dg-detail>
   </ng-template>

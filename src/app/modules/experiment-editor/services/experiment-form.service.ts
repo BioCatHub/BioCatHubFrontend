@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {floatValidator} from '../../../utility/validators/float.validator';
 
 /**
  * Service that manages the experiment form.
@@ -32,8 +33,8 @@ export class ExperimentFormService {
       }),
       vessel: this.fb.group({
         type: ['', [Validators.required]],
-        volume: ['', [Validators.required]], // TODO validate number
-        unit: ['ml', [Validators.required]],
+        volume: ['', [Validators.required, floatValidator()]],
+        unit: ['ml'],
         attributes: this.fb.array([])
       })
     });

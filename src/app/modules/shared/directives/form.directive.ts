@@ -16,7 +16,7 @@ export class FormDirective {
   }
 
   /**
-   * Marksa all registered controls as touched.
+   * Marks all registered controls as touched.
    */
   markAsTouched() {
     this.formService.markAsTouched();

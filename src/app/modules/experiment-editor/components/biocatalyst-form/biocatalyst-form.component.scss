@@ -18,4 +18,11 @@ bch-biocatalyst-form {
     width: fit-content;
   }
 
+  .detail-progress {
+    overflow: visible;
+    margin-top: -52px;
+    height: .25rem;
+    margin-bottom: calc(52px - .25rem);
+  }
+
 }

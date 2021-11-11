@@ -3,6 +3,9 @@ import {FormGroup} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {ClrForm} from '@clr/angular';
 
+/**
+ * Form component for experiment conditions.
+ */
 @Component({
   selector: 'bch-conditions-form',
   templateUrl: './conditions-form.component.html',
