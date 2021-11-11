@@ -40,7 +40,9 @@
       <clr-dg-detail-header>Edit enzyme</clr-dg-detail-header>
       <bch-enzyme-search cds-layout="p:lg" (selectEnzyme)="selectEnzymeFromSearch($event)"></bch-enzyme-search>
       <bch-enzyme-form [form]="detail"></bch-enzyme-form>
-      <cds-button (click)="deleteEnzyme(detail)">Delete enzyme</cds-button>
+      <div cds-layout="p-b:lg p-r:lg p-l:lg horizontal align:right">
+        <cds-button action="outline" status="danger" size="sm" (click)="deleteEnzyme(detail)">Delete enzyme</cds-button>
+      </div>
     </clr-dg-detail>
   </ng-template>
 

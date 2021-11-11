@@ -103,7 +103,6 @@ export class BiocatalystFormComponent implements OnInit, AfterViewInit, OnDestro
   /**
    * Deletes the enzyme from the form array.
    * TODO raises an experssionhaschanged error
-   * TODO style button
    *
    * @param enzyme Enzyme to delete.
    */
