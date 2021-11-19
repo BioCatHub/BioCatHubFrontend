@@ -17,6 +17,7 @@ import {ExperimentEditorNavButtonsComponent} from './components/experiment-edito
 import {FormProgressDirective} from './directives/form-progress.directive';
 import {EnzymeFormComponent} from './components/enzyme-form/enzyme-form.component';
 import {EnzymeSearchComponent} from './components/enzyme-search/enzyme-search.component';
+import {ReactionFormComponent} from './components/reaction-form/reaction-form.component';
 
 /**
  * Module that contains the experiment editor.
@@ -33,7 +34,8 @@ import {EnzymeSearchComponent} from './components/enzyme-search/enzyme-search.co
     ExperimentEditorNavButtonsComponent,
     FormProgressDirective,
     EnzymeFormComponent,
-    EnzymeSearchComponent
+    EnzymeSearchComponent,
+    ReactionFormComponent
   ],
   imports: [
     CommonModule,

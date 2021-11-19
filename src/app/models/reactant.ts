@@ -41,7 +41,7 @@ export class Reactant {
     reactant.smiles = payload.smiles;
     reactant.stoichometricCoefficient = payload.stoichometricCoefficient;
     reactant.imageUrl = payload.imageUrl;
-    reactant.others = payload.others.map(Attribute.deserialize);
+    reactant.others = payload.others ? payload.others.map(Attribute.deserialize) : [];
     return reactant;
   }
 

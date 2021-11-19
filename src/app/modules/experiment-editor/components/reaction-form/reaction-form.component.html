@@ -1,0 +1,29 @@
+<form [formGroup]="form" bchForm cds-layout="p:lg">
+  <cds-form-group layout="horizontal">
+
+    <cds-select layout="horizontal" bchControlGroup>
+      <label>Biocatalyst</label>
+      <select formControlName="biocatalyst" bchFormControl>
+        <option *ngFor="let biocatalyst of getBiocatalysts()"
+                [ngValue]="biocatalyst">{{biocatalyst.get('name').value}}</option>
+      </select>
+    </cds-select>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>Name</label>
+      <input placeholder="e.g. Alcohol dehydrogenase" formControlName="name" bchFormControl/>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'name'">
+        Name is required
+      </cds-control-message>
+    </cds-input>
+
+    <cds-select layout="horizontal">
+      <label>Select reaction from Brenda</label>
+      <select formControlName="selectedReaction">
+        <option *ngFor="let brendaReaction of brendaReactions"
+                [ngValue]="brendaReaction">{{brendaReaction.value}}</option>
+      </select>
+    </cds-select>
+
+  </cds-form-group>
+</form>

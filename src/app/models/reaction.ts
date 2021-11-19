@@ -5,6 +5,7 @@ import {Reactant} from './reactant';
  */
 export class Reaction {
 
+  id: number;
   value: string;
   educts: Reactant[];
   products: Reactant[];
@@ -23,8 +24,9 @@ export class Reaction {
   public static deserialize(payload: any): Reaction {
     const reaction = new Reaction();
     reaction.value = payload.value;
-    reaction.educts = payload.educts.map(Reactant.deserialize);
-    reaction.products = payload.products.map(Reactant.deserialize);
+    reaction.id = payload.id;
+    reaction.educts = payload.educts ? payload.educts.map(Reactant.deserialize) : [];
+    reaction.products = payload.products ? payload.products.map(Reactant.deserialize) : [];
     return reaction;
   }
 
@@ -36,6 +38,7 @@ export class Reaction {
    */
   public static serialize(reaction: Reaction): any {
     return {
+      id: reaction.id,
       value: reaction.value,
       educts: reaction.educts.map(Reactant.serialize),
       products: reaction.products.map(Reactant.serialize),

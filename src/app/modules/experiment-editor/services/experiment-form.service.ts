@@ -29,7 +29,7 @@ export class ExperimentFormService {
         test: ['', [Validators.required]]
       }),
       reactants: this.fb.group({
-        test: ['', [Validators.required]]
+        reactions: this.fb.array([])
       }),
       vessel: this.fb.group({
         type: ['', [Validators.required]],

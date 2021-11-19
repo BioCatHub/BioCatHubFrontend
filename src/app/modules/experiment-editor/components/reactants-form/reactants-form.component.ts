@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {ClrForm} from '@clr/angular';
 
@@ -18,7 +18,15 @@ export class ReactantsFormComponent implements OnInit, AfterViewInit, OnDestroy 
   public form: FormGroup;
 
   constructor(private experimentFormService: ExperimentFormService,
+              private fb: FormBuilder,
               private cdr: ChangeDetectorRef) {
+  }
+
+  /**
+   * Returns the reactions form array.
+   */
+  reactions(): FormArray {
+    return this.form.get('reactions') as FormArray;
   }
 
   /**
@@ -34,8 +42,8 @@ export class ReactantsFormComponent implements OnInit, AfterViewInit, OnDestroy 
    */
   ngAfterViewInit() {
     if (this.form.touched) {
-      this.clrForm.markAsTouched();
-      this.cdr.detectChanges();
+      // this.clrForm.markAsTouched();
+      // this.cdr.detectChanges();
     }
   }
 
@@ -46,6 +54,19 @@ export class ReactantsFormComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnDestroy() {
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
+  }
+
+  /**
+   * Adds a new reaction form group to the array.
+   */
+  addReaction() {
+    const reactionGroup = this.fb.group({
+      biocatalyst: [null, [Validators.required]],
+      name: [null, [Validators.required]],
+      reactants: this.fb.array([]),
+      selectedReaction: [null]
+    });
+    (this.form.get('reactions') as FormArray).push(reactionGroup);
   }
 
 
