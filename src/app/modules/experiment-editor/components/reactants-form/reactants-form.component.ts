@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {ClrForm} from '@clr/angular';
 
@@ -67,6 +67,21 @@ export class ReactantsFormComponent implements OnInit, AfterViewInit, OnDestroy 
       selectedReaction: [null]
     });
     (this.form.get('reactions') as FormArray).push(reactionGroup);
+  }
+
+  /**
+   * Deletes the reaction from the form array.
+   *
+   * @param reaction Reaction to delete.
+   */
+  deleteReaction(reaction: AbstractControl) {
+    for (let i = 0; i < this.reactions().length; i++) {
+      if (this.reactions().at(i) === reaction) {
+        this.reactions().removeAt(i);
+        // this.cdr.detectChanges();
+        break;
+      }
+    }
   }
 
 

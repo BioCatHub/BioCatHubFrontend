@@ -8,7 +8,6 @@ import {Reactant} from '../../../../models/reactant';
 
 // TODO add reactant form
 // TODO make reactants deletable
-// TODO make reactions deletable
 // TODO add reaction graphics
 // TODO add progress bars
 // TODO add reaction validation
@@ -111,6 +110,11 @@ export class ReactionFormComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Adds a new reactant to the reactants array.
+   *
+   * @param reactant Reactant to add as FormGroup.
+   */
   addReactant(reactant = new Reactant()) {
     const reactantControl = this.fb.group({
       name: [reactant.name],

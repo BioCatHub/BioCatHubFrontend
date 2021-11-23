@@ -16,7 +16,13 @@
     </clr-dg-cell>
 
     <clr-dg-row-detail *clrIfExpanded>
-      <bch-reaction-form [form]="reaction"></bch-reaction-form>
+      <div cds-layout="vertical">
+        <bch-reaction-form [form]="reaction"></bch-reaction-form>
+        <div cds-layout="p-t:md horizontal align:right">
+          <cds-button action="outline" status="danger" size="sm" (click)="deleteReaction(reaction)">Delete reaction
+          </cds-button>
+        </div>
+      </div>
     </clr-dg-row-detail>
 
   </clr-dg-row>
