@@ -17,13 +17,20 @@
       </cds-control-message>
     </cds-input>
 
-    <cds-select layout="horizontal">
+    <cds-select layout="horizontal" *ngIf="!brendaReactionsLoading">
       <label>Select reaction from Brenda</label>
       <select formControlName="selectedReaction">
         <option *ngFor="let brendaReaction of brendaReactions"
                 [ngValue]="brendaReaction">{{brendaReaction.value}}</option>
       </select>
     </cds-select>
+
+    <cds-control layout="horizontal" *ngIf="brendaReactionsLoading">
+      <label>Select reaction from Brenda</label>
+      <div cds-control>
+        <clr-spinner [clrSmall]="true"></clr-spinner>
+      </div>
+    </cds-control>
 
   </cds-form-group>
 </form>

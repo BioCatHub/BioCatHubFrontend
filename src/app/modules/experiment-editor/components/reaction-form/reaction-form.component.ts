@@ -4,7 +4,6 @@ import {ExperimentFormService} from '../../services/experiment-form.service';
 import {Reaction} from '../../../../models/reaction';
 import {ReactionService} from '../../../../services/reaction.service';
 
-// TODO add loading indicator after selecting biocatalyst
 // TODO set reaction value = name?
 // TODO set educts and products in extra table
 
@@ -18,6 +17,7 @@ export class ReactionFormComponent implements OnInit {
   @Input() form: FormGroup;
 
   brendaReactions: Reaction[] = [];
+  brendaReactionsLoading = false;
 
   constructor(private experimentFormService: ExperimentFormService,
               private reactionService: ReactionService) {
@@ -30,9 +30,11 @@ export class ReactionFormComponent implements OnInit {
       }
     });
     this.form.get('selectedReaction')?.valueChanges.subscribe(selectedReaction => {
-      this.reactionService.getReaction(selectedReaction.id).subscribe(reactionDetail => {
-        console.log(reactionDetail);
-      });
+      if (selectedReaction) {
+        this.reactionService.getReaction(selectedReaction.id).subscribe(reactionDetail => {
+          console.log(reactionDetail);
+        });
+      }
     });
   }
 
@@ -42,8 +44,10 @@ export class ReactionFormComponent implements OnInit {
   }
 
   loadReactions(ecNumber: string) {
+    this.brendaReactionsLoading = true;
     this.reactionService.getReactionList(ecNumber).subscribe(reactions => {
       this.brendaReactions = reactions;
+      this.brendaReactionsLoading = false;
     });
   }
 
