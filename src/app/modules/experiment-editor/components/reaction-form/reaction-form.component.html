@@ -34,3 +34,22 @@
 
   </cds-form-group>
 </form>
+
+<clr-datagrid>
+  <clr-dg-column>Reactant name</clr-dg-column>
+  <clr-dg-column>Reactant role</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let reactant of reactants()" [clrDgItem]="reactant">
+
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="reactant.get('name').value"></bch-optional-parameter>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="reactant.get('role').value"></bch-optional-parameter>
+    </clr-dg-cell>
+
+  </clr-dg-row>
+
+  <clr-dg-placeholder>No reactions added yet</clr-dg-placeholder>
+
+</clr-datagrid>
