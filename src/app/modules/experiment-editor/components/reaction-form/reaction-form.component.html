@@ -36,6 +36,16 @@
 </form>
 
 <clr-datagrid>
+
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-secondary" (click)="addReactant()">
+        <cds-icon shape="plus"></cds-icon>
+        Add reactant
+      </button>
+    </div>
+  </clr-dg-action-bar>
+
   <clr-dg-column>Reactant name</clr-dg-column>
   <clr-dg-column>Reactant role</clr-dg-column>
 

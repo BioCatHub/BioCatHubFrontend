@@ -1,11 +1,18 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {Reaction} from '../../../../models/reaction';
 import {ReactionService} from '../../../../services/reaction.service';
 import {Subscription} from 'rxjs';
+import {Reactant} from '../../../../models/reactant';
 
-// TODO set educts and products in extra table
+// TODO add reactant form
+// TODO make reactants deletable
+// TODO make reactions deletable
+// TODO add reaction graphics
+// TODO add progress bars
+// TODO add reaction validation
+// TODO add reactant validation
 
 /**
  * A form component for editing a reaction.
@@ -13,7 +20,8 @@ import {Subscription} from 'rxjs';
 @Component({
   selector: 'bch-reaction-form',
   templateUrl: './reaction-form.component.html',
-  styleUrls: ['./reaction-form.component.scss']
+  styleUrls: ['./reaction-form.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ReactionFormComponent implements OnInit, OnDestroy {
 
@@ -92,15 +100,23 @@ export class ReactionFormComponent implements OnInit, OnDestroy {
     return ((this.form.get('reactants') as FormArray).controls as FormControl[]);
   }
 
+  /**
+   * Sets the list of reactants in the form after a reaction has been selected from the dropdown.
+   *
+   * @param reaction Reactions from which to take the reactants.
+   */
   setReactants(reaction: Reaction) {
     [...reaction.educts, ...reaction.products].map(reactant => {
-      const reactantControl = this.fb.group({
-        name: [reactant.name],
-        role: [reactant.role],
-      });
-      (this.form.get('reactants') as FormArray).push(reactantControl);
+      this.addReactant(reactant);
     });
-    console.log(this.reactants());
+  }
+
+  addReactant(reactant = new Reactant()) {
+    const reactantControl = this.fb.group({
+      name: [reactant.name],
+      role: [reactant.role],
+    });
+    (this.form.get('reactants') as FormArray).push(reactantControl);
   }
 
 }
