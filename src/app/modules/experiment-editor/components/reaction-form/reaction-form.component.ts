@@ -119,6 +119,12 @@ export class ReactionFormComponent implements OnInit, OnDestroy {
     const reactantControl = this.fb.group({
       name: [reactant.name],
       role: [reactant.role],
+      supplier: [null],
+      concentration: [null],
+      unit: ['g/L'],
+      purity: [null],
+      smiles: [null],
+      inchi: [null],
     });
     (this.form.get('reactants') as FormArray).push(reactantControl);
   }

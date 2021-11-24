@@ -20,6 +20,7 @@ export class Reactant {
 
   constructor() {
     this.others = [];
+    this.role = 'Substrate';
   }
 
   /**

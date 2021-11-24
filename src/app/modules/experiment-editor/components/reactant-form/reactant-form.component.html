@@ -1,0 +1,56 @@
+<form [formGroup]="form" bchForm cds-layout="p:lg">
+  <cds-form-group layout="horizontal">
+
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>Name</label>
+      <input placeholder="e.g. Alcohol dehydrogenase" formControlName="name" bchFormControl/>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'name'">
+        Name is required
+      </cds-control-message>
+    </cds-input>
+
+    <cds-select layout="horizontal" bchControlGroup>
+      <label>Reactant role</label>
+      <select formControlName="role" bchFormControl>
+        <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+      </select>
+    </cds-select>
+
+    <cds-input-group layout="horizontal" bchControlGroup>
+      <label>Concentration</label>
+      <cds-input>
+        <label>Concentration</label>
+        <input placeholder="e.g. 100" formControlName="concentration" bchFormControl/>
+      </cds-input>
+      <cds-select cds-layout="align:shrink">
+        <label>Unit</label>
+        <select bchFormControl formControlName="unit">
+          <option [ngValue]="unit" *ngFor="let unit of units">{{unit}}</option>
+        </select>
+      </cds-select>
+    </cds-input-group>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>Purity</label>
+      <input placeholder="100" formControlName="purity" bchFormControl/>
+      <cds-control-action action="suffix" readonly>%</cds-control-action>
+    </cds-input>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>Supplier</label>
+      <input placeholder="e.g. Alcohol dehydrogenase" formControlName="supplier" bchFormControl/>
+    </cds-input>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>SMILES</label>
+      <input formControlName="smiles" bchFormControl/>
+    </cds-input>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>INCHI</label>
+      <input formControlName="inchi" bchFormControl/>
+    </cds-input>
+
+  </cds-form-group>
+</form>

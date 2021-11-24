@@ -78,7 +78,6 @@ export class ReactantsFormComponent implements OnInit, AfterViewInit, OnDestroy 
     for (let i = 0; i < this.reactions().length; i++) {
       if (this.reactions().at(i) === reaction) {
         this.reactions().removeAt(i);
-        // this.cdr.detectChanges();
         break;
       }
     }
