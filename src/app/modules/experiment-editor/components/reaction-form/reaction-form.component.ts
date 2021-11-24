@@ -6,7 +6,6 @@ import {ReactionService} from '../../../../services/reaction.service';
 import {Subscription} from 'rxjs';
 import {Reactant} from '../../../../models/reactant';
 
-// TODO add reactant form
 // TODO make reactants deletable
 // TODO add reaction graphics
 // TODO add progress bars

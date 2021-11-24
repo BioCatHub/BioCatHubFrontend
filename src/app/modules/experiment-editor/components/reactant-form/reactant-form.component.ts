@@ -1,22 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
+/**
+ * Form component for reactants.
+ */
 @Component({
   selector: 'bch-reactant-form',
   templateUrl: './reactant-form.component.html',
   styleUrls: ['./reactant-form.component.scss']
 })
-export class ReactantFormComponent implements OnInit {
+export class ReactantFormComponent {
 
   @Input() form: FormGroup;
 
   roles = ['Substrate', 'Product'];
   units = ['g/L', 'mmol/L'];
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
 }
