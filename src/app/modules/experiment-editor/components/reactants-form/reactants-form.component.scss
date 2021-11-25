@@ -1,0 +1,16 @@
+bch-reactants-form {
+
+  clr-dg-row.datagrid-row:hover, .datagrid-row:hover .datagrid-row-sticky {
+    background-color: var(--clr-table-bgcolor) !important;
+  }
+
+  .datagrid-row-flex .datagrid-row-detail .datagrid-cell {
+    display: flex;
+    align-items: center;
+  }
+
+  .datagrid-detail-caret.datagrid-cell {
+    padding-top: .3rem !important;
+  }
+
+}

@@ -1,4 +1,12 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {ClrForm} from '@clr/angular';
@@ -9,7 +17,8 @@ import {ClrForm} from '@clr/angular';
 @Component({
   selector: 'bch-reactants-form',
   templateUrl: './reactants-form.component.html',
-  styleUrls: ['./reactants-form.component.scss']
+  styleUrls: ['./reactants-form.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ReactantsFormComponent implements OnInit, AfterViewInit, OnDestroy {
 

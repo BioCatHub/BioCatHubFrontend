@@ -10,8 +10,6 @@ import {Reactant} from '../../../../models/reactant';
 // TODO add progress bars
 // TODO add reaction validation
 // TODO add reactant validation
-// TODO remove hover effect
-// TODO fix padding in reactant datagrid
 
 /**
  * A form component for editing a reaction.
