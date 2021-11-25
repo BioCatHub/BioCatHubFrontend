@@ -103,6 +103,7 @@ export class ReactionFormComponent implements OnInit, OnDestroy {
    * @param reaction Reactions from which to take the reactants.
    */
   setReactants(reaction: Reaction) {
+    (this.form.get('reactants') as FormArray).clear();
     [...reaction.educts, ...reaction.products].map(reactant => {
       this.addReactant(reactant);
     });
@@ -123,6 +124,7 @@ export class ReactionFormComponent implements OnInit, OnDestroy {
       purity: [null],
       smiles: [null],
       inchi: [null],
+      imageUrl: [reactant.imageUrl]
     });
     (this.form.get('reactants') as FormArray).push(reactantControl);
   }

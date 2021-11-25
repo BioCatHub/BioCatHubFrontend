@@ -19,6 +19,7 @@ import {EnzymeFormComponent} from './components/enzyme-form/enzyme-form.componen
 import {EnzymeSearchComponent} from './components/enzyme-search/enzyme-search.component';
 import {ReactionFormComponent} from './components/reaction-form/reaction-form.component';
 import {ReactantFormComponent} from './components/reactant-form/reactant-form.component';
+import {ReactionFormulaGraphicComponent} from './components/reaction-formula-graphic/reaction-formula-graphic.component';
 
 /**
  * Module that contains the experiment editor.
@@ -37,7 +38,8 @@ import {ReactantFormComponent} from './components/reactant-form/reactant-form.co
     EnzymeFormComponent,
     EnzymeSearchComponent,
     ReactionFormComponent,
-    ReactantFormComponent
+    ReactantFormComponent,
+    ReactionFormulaGraphicComponent
   ],
   imports: [
     CommonModule,

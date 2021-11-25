@@ -52,5 +52,12 @@
       <input formControlName="inchi" bchFormControl/>
     </cds-input>
 
+    <cds-control *ngIf="form.get('imageUrl')?.value">
+      <label>Image</label>
+      <div cds-control>
+        <img [src]="form.get('imageUrl').value" alt="Reactant image"/>
+      </div>
+    </cds-control>
+
   </cds-form-group>
 </form>

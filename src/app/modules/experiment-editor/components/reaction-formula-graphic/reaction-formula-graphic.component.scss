@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}
+
+.reactant-container {
+  display: inline-flex;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.reaction-text {
+  font-size: 2rem;
+}

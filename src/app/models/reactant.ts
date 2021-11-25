@@ -21,6 +21,7 @@ export class Reactant {
   constructor() {
     this.others = [];
     this.role = 'Substrate';
+    this.imageUrl = 'https://www.ebi.ac.uk/chebi/displayImage.do?defaultImage=true&imageIndex=0&chebiId=15035'; // TODO
   }
 
   /**
