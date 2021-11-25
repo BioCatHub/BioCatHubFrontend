@@ -1,16 +1,17 @@
 import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {Reaction} from '../../../../models/reaction';
 import {ReactionService} from '../../../../services/reaction.service';
 import {Subscription} from 'rxjs';
 import {Reactant} from '../../../../models/reactant';
 
-// TODO make reactants deletable
 // TODO add reaction graphics
 // TODO add progress bars
 // TODO add reaction validation
 // TODO add reactant validation
+// TODO remove hover effect
+// TODO fix padding in reactant datagrid
 
 /**
  * A form component for editing a reaction.
@@ -126,6 +127,21 @@ export class ReactionFormComponent implements OnInit, OnDestroy {
       inchi: [null],
     });
     (this.form.get('reactants') as FormArray).push(reactantControl);
+  }
+
+  /**
+   * Deletes the reactant from the form array.
+   *
+   * @param reactant Reactant to delete.
+   */
+  deleteReactant(reactant: AbstractControl) {
+    const reactants = this.form.get('reactants') as FormArray;
+    for (let i = 0; i < reactants.length; i++) {
+      if (reactants.at(i) === reactant) {
+        reactants.removeAt(i);
+        break;
+      }
+    }
   }
 
 }

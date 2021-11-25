@@ -67,6 +67,10 @@
     <clr-dg-detail-header *ngIf="!detail.get('name').value">New reactant</clr-dg-detail-header>
     <clr-dg-detail-body>
       <bch-reactant-form [form]="detail"></bch-reactant-form>
+      <div cds-layout="p-t:md p-r:lg p-b:lg horizontal align:right">
+        <cds-button action="outline" status="danger" size="sm" (click)="deleteReactant(detail)">Delete reactant
+        </cds-button>
+      </div>
     </clr-dg-detail-body>
   </clr-dg-detail>
 
