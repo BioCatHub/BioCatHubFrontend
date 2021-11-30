@@ -1,12 +1,10 @@
-import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {Reaction} from '../../../../models/reaction';
 import {ReactionService} from '../../../../services/reaction.service';
 import {Subscription} from 'rxjs';
 import {Reactant} from '../../../../models/reactant';
-
-// TODO add progress bars
 
 /**
  * A form component for editing a reaction.
@@ -17,7 +15,7 @@ import {Reactant} from '../../../../models/reactant';
   styleUrls: ['./reaction-form.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ReactionFormComponent implements OnInit, OnDestroy {
+export class ReactionFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() form: FormGroup;
 
@@ -29,6 +27,7 @@ export class ReactionFormComponent implements OnInit, OnDestroy {
 
   constructor(private experimentFormService: ExperimentFormService,
               private fb: FormBuilder,
+              private cdr: ChangeDetectorRef,
               private reactionService: ReactionService) {
   }
 
@@ -56,6 +55,13 @@ export class ReactionFormComponent implements OnInit, OnDestroy {
           });
         }
       }) as Subscription;
+  }
+
+  /**
+   * Makes sure the progress bar shows the correct value.
+   */
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
   }
 
   /**

@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {ClrForm} from '@clr/angular';
@@ -20,15 +12,14 @@ import {ClrForm} from '@clr/angular';
   styleUrls: ['./reactants-form.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ReactantsFormComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ReactantsFormComponent implements OnInit, OnDestroy {
 
   @ViewChild(ClrForm, {static: true}) clrForm: ClrForm;
 
   public form: FormGroup;
 
   constructor(private experimentFormService: ExperimentFormService,
-              private fb: FormBuilder,
-              private cdr: ChangeDetectorRef) {
+              private fb: FormBuilder) {
   }
 
   /**
@@ -43,17 +34,6 @@ export class ReactantsFormComponent implements OnInit, AfterViewInit, OnDestroy 
    */
   ngOnInit(): void {
     this.form = this.experimentFormService.getExperimentFormSubGroup('reactants');
-  }
-
-  /**
-   * When the form is rendered at least the second time, it's form control statuses can be touched and invalid.
-   * In this case we need to mark the UI as touched.
-   */
-  ngAfterViewInit() {
-    if (this.form.touched) {
-      // this.clrForm.markAsTouched();
-      // this.cdr.detectChanges();
-    }
   }
 
   /**

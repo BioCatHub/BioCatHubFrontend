@@ -1,6 +1,10 @@
 import {Component, Input} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
+import {environment} from '../../../../../environments/environment';
 
+/**
+ * Component that shows the reaction formula for the reaction that is defined in the input form.
+ */
 @Component({
   selector: 'bch-reaction-formula-graphic',
   templateUrl: './reaction-formula-graphic.component.html',
@@ -10,25 +14,34 @@ export class ReactionFormulaGraphicComponent {
 
   @Input() form: FormGroup;
 
+  /**
+   * Return the number of reactants in the reaction.
+   */
   getReactantsCount(): number {
     return (this.form.get('reactants') as FormArray).controls.length;
   }
 
-  getSubstrates(): string[] {
+  /**
+   * Returns the image paths of all substrates in the reaction.
+   */
+  getSubstrateImagePaths(): string[] {
     const substrates: string[] = [];
     (this.form.get('reactants') as FormArray).controls.map(control => {
       if (control.get('role')?.value === 'substrate') {
-        substrates.push('http://127.0.0.1:5000/' + control.get('smiles')?.value);
+        substrates.push(environment.bchSmilesToStructurePath + control.get('smiles')?.value);
       }
     });
     return substrates;
   }
 
-  getProducts(): string[] {
+  /**
+   * Returns the image paths of all products in the reaction.
+   */
+  getProductImagePaths(): string[] {
     const products: string[] = [];
     (this.form.get('reactants') as FormArray).controls.map(control => {
       if (control.get('role')?.value === 'product') {
-        products.push('http://127.0.0.1:5000/' + control.get('smiles')?.value);
+        products.push(environment.bchSmilesToStructurePath + control.get('smiles')?.value);
       }
     });
     return products;

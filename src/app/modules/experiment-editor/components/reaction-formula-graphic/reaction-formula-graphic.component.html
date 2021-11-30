@@ -7,18 +7,18 @@
   </div>
   <div class="card-block">
     <div class="reaction-container" *ngIf="getReactantsCount() > 0">
-      <div *ngFor="let substrate of getSubstrates(); let i = index" class="reactant-container">
-        <img [src]="substrate" class="molecule-image"/>
-        <span class="reaction-text" *ngIf="i < getSubstrates().length - 1">+</span>
+      <div *ngFor="let substrate of getSubstrateImagePaths(); let i = index" class="reactant-container">
+        <img [src]="substrate" class="molecule-image" alt="Molecule image"/>
+        <span class="reaction-text" *ngIf="i < getSubstrateImagePaths().length - 1">+</span>
       </div>
 
       <div class="reactant-container">
         <span class="reaction-text">⇌</span>
       </div>
 
-      <div *ngFor="let product of getProducts(); let i = index" class="reactant-container">
-        <img [src]="product" class="molecule-image"/>
-        <span class="reaction-text" *ngIf="i < getProducts().length - 1">+</span>
+      <div *ngFor="let product of getProductImagePaths(); let i = index" class="reactant-container">
+        <img [src]="product" class="molecule-image" alt="Molecule image"/>
+        <span class="reaction-text" *ngIf="i < getProductImagePaths().length - 1">+</span>
       </div>
     </div>
     <cds-alert status="info" *ngIf="getReactantsCount() === 0">

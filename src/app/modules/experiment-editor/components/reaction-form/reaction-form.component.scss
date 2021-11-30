@@ -5,4 +5,10 @@ bch-reaction-form {
     padding-top: .6rem !important;
   }
 
+  clr-progress-bar.progress {
+    progress {
+      height: 5px;
+    }
+  }
+
 }

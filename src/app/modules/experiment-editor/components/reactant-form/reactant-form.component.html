@@ -1,3 +1,10 @@
+<div cds-layout="m-l:lg m-r:lg m-t:lg">
+  <clr-progress-bar class="detail-progress" [bchFormProgress]="form"
+                    [excludedControls]="['unit', 'role']"
+                    #fp=formProgress [clrMax]="fp.max" [clrValue]="fp.value">
+  </clr-progress-bar>
+</div>
+
 <form [formGroup]="form" bchForm cds-layout="p:lg">
   <cds-form-group layout="horizontal">
 
@@ -68,7 +75,7 @@
     <cds-control *ngIf="form.get('smiles')?.value">
       <label>Image</label>
       <div cds-control>
-        <img [src]="'http://127.0.0.1:5000/' + form.get('smiles').value" alt="Reactant image"/>
+        <img [src]="environment.bchSmilesToStructurePath + form.get('smiles').value" alt="Reactant image"/>
       </div>
     </cds-control>
 

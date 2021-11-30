@@ -14,9 +14,15 @@ import {Attribute} from '../../../models/attribute';
 export class FormProgressDirective implements OnInit, OnDestroy {
 
   @Input() bchFormProgress: FormGroup;
+  /**
+   * Expects an array of control names. Controls with the given names will not be added to the total control count
+   * of the progress bar.
+   */
+  @Input() excludedControls: string[] = [];
 
   public value = 0;
   public max = 0;
+
   private valueChangesSubscription: Subscription;
 
   constructor(private el: ElementRef) {
@@ -102,6 +108,10 @@ export class FormProgressDirective implements OnInit, OnDestroy {
    * @param control Control to check.
    */
   private walkFormControl(control: FormControl) {
+    const controlName = this.getControlName(control);
+    if (controlName && this.excludedControls.includes(controlName)) {
+      return;
+    }
     if (control.value instanceof Attribute) {
       this.max += 2;
       if (control.value.key) {
@@ -116,6 +126,19 @@ export class FormProgressDirective implements OnInit, OnDestroy {
         this.value += 1;
       }
     }
+  }
+
+  /**
+   * Fetches the name of the given control by traversing the parent control group.
+   *
+   * @param control Control to get name for.
+   */
+  private getControlName(control: AbstractControl): string | null {
+    const formGroup = control?.parent?.controls;
+    if (formGroup) {
+      return Object.keys(formGroup).find(name => control === ((formGroup as any)[name])) || null;
+    }
+    return null;
   }
 
 }
