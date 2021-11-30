@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 
 @Component({
@@ -6,21 +6,19 @@ import {FormArray, FormGroup} from '@angular/forms';
   templateUrl: './reaction-formula-graphic.component.html',
   styleUrls: ['./reaction-formula-graphic.component.scss']
 })
-export class ReactionFormulaGraphicComponent implements OnInit {
+export class ReactionFormulaGraphicComponent {
 
   @Input() form: FormGroup;
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
+  getReactantsCount(): number {
+    return (this.form.get('reactants') as FormArray).controls.length;
   }
 
   getSubstrates(): string[] {
     const substrates: string[] = [];
     (this.form.get('reactants') as FormArray).controls.map(control => {
       if (control.get('role')?.value === 'substrate') {
-        substrates.push(control.get('imageUrl')?.value);
+        substrates.push('http://127.0.0.1:5000/' + control.get('smiles')?.value);
       }
     });
     return substrates;
@@ -30,7 +28,7 @@ export class ReactionFormulaGraphicComponent implements OnInit {
     const products: string[] = [];
     (this.form.get('reactants') as FormArray).controls.map(control => {
       if (control.get('role')?.value === 'product') {
-        products.push(control.get('imageUrl')?.value);
+        products.push('http://127.0.0.1:5000/' + control.get('smiles')?.value);
       }
     });
     return products;

@@ -7,6 +7,9 @@
         <option *ngFor="let biocatalyst of getBiocatalysts()"
                 [ngValue]="biocatalyst">{{biocatalyst.get('name').value}}</option>
       </select>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'biocatalyst'">
+        Biocatalyst is required
+      </cds-control-message>
     </cds-select>
 
     <cds-input layout="horizontal" bchControlGroup>

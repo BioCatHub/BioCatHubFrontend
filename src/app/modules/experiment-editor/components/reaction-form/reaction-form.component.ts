@@ -1,15 +1,12 @@
 import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentFormService} from '../../services/experiment-form.service';
 import {Reaction} from '../../../../models/reaction';
 import {ReactionService} from '../../../../services/reaction.service';
 import {Subscription} from 'rxjs';
 import {Reactant} from '../../../../models/reactant';
 
-// TODO add reaction graphics
 // TODO add progress bars
-// TODO add reaction validation
-// TODO add reactant validation
 
 /**
  * A form component for editing a reaction.
@@ -116,15 +113,15 @@ export class ReactionFormComponent implements OnInit, OnDestroy {
    */
   addReactant(reactant = new Reactant()) {
     const reactantControl = this.fb.group({
-      name: [reactant.name],
-      role: [reactant.role],
+      name: [reactant.name, [Validators.required]],
+      role: [reactant.role, [Validators.required]],
       supplier: [null],
-      concentration: [null],
-      unit: ['g/L'],
+      concentration: [null, [Validators.required]],
+      unit: ['g/L', [Validators.required]],
       purity: [null],
-      smiles: [null],
+      formula: [null, [Validators.required]],
+      smiles: [reactant.smiles, [Validators.required]],
       inchi: [null],
-      imageUrl: [reactant.imageUrl]
     });
     (this.form.get('reactants') as FormArray).push(reactantControl);
   }

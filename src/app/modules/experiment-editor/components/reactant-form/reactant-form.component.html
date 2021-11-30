@@ -1,7 +1,6 @@
 <form [formGroup]="form" bchForm cds-layout="p:lg">
   <cds-form-group layout="horizontal">
 
-
     <cds-input layout="horizontal" bchControlGroup>
       <label>Name</label>
       <input placeholder="e.g. Alcohol dehydrogenase" formControlName="name" bchFormControl/>
@@ -29,6 +28,9 @@
           <option [ngValue]="unit" *ngFor="let unit of units">{{unit}}</option>
         </select>
       </cds-select>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'concentration'">
+        Concentration is required
+      </cds-control-message>
     </cds-input-group>
 
     <cds-input layout="horizontal" bchControlGroup>
@@ -43,8 +45,19 @@
     </cds-input>
 
     <cds-input layout="horizontal" bchControlGroup>
+      <label>Formula</label>
+      <input formControlName="formula" bchFormControl/>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'formula'">
+        Formula is required
+      </cds-control-message>
+    </cds-input>
+
+    <cds-input layout="horizontal" bchControlGroup>
       <label>SMILES</label>
       <input formControlName="smiles" bchFormControl/>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'smiles'">
+        SMILES code is required
+      </cds-control-message>
     </cds-input>
 
     <cds-input layout="horizontal" bchControlGroup>
@@ -52,10 +65,10 @@
       <input formControlName="inchi" bchFormControl/>
     </cds-input>
 
-    <cds-control *ngIf="form.get('imageUrl')?.value">
+    <cds-control *ngIf="form.get('smiles')?.value">
       <label>Image</label>
       <div cds-control>
-        <img [src]="form.get('imageUrl').value" alt="Reactant image"/>
+        <img [src]="'http://127.0.0.1:5000/' + form.get('smiles').value" alt="Reactant image"/>
       </div>
     </cds-control>
 

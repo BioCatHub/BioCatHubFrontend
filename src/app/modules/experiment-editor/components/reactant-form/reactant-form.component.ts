@@ -13,7 +13,7 @@ export class ReactantFormComponent {
 
   @Input() form: FormGroup;
 
-  roles = ['Substrate', 'Product'];
+  roles = ['substrate', 'product'];
   units = ['g/L', 'mmol/L'];
 
 }
