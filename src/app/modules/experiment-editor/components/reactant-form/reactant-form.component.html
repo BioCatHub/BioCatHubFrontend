@@ -1,0 +1,83 @@
+<div cds-layout="m-l:lg m-r:lg m-t:lg">
+  <clr-progress-bar class="detail-progress" [bchFormProgress]="form"
+                    [excludedControls]="['unit', 'role']"
+                    #fp=formProgress [clrMax]="fp.max" [clrValue]="fp.value">
+  </clr-progress-bar>
+</div>
+
+<form [formGroup]="form" bchForm cds-layout="p:lg">
+  <cds-form-group layout="horizontal">
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>Name</label>
+      <input placeholder="e.g. Alcohol dehydrogenase" formControlName="name" bchFormControl/>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'name'">
+        Name is required
+      </cds-control-message>
+    </cds-input>
+
+    <cds-select layout="horizontal" bchControlGroup>
+      <label>Reactant role</label>
+      <select formControlName="role" bchFormControl>
+        <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+      </select>
+    </cds-select>
+
+    <cds-input-group layout="horizontal" bchControlGroup>
+      <label>Concentration</label>
+      <cds-input>
+        <label>Concentration</label>
+        <input placeholder="e.g. 100" formControlName="concentration" bchFormControl/>
+      </cds-input>
+      <cds-select cds-layout="align:shrink">
+        <label>Unit</label>
+        <select bchFormControl formControlName="unit">
+          <option [ngValue]="unit" *ngFor="let unit of units">{{unit}}</option>
+        </select>
+      </cds-select>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'concentration'">
+        Concentration is required
+      </cds-control-message>
+    </cds-input-group>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>Purity</label>
+      <input placeholder="100" formControlName="purity" bchFormControl/>
+      <cds-control-action action="suffix" readonly>%</cds-control-action>
+    </cds-input>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>Supplier</label>
+      <input placeholder="e.g. Alcohol dehydrogenase" formControlName="supplier" bchFormControl/>
+    </cds-input>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>Formula</label>
+      <input formControlName="formula" bchFormControl/>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'formula'">
+        Formula is required
+      </cds-control-message>
+    </cds-input>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>SMILES</label>
+      <input formControlName="smiles" bchFormControl/>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'smiles'">
+        SMILES code is required
+      </cds-control-message>
+    </cds-input>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>INCHI</label>
+      <input formControlName="inchi" bchFormControl/>
+    </cds-input>
+
+    <cds-control *ngIf="form.get('smiles')?.value">
+      <label>Image</label>
+      <div cds-control>
+        <img [src]="environment.bchSmilesToStructurePath + form.get('smiles').value" alt="Reactant image"/>
+      </div>
+    </cds-control>
+
+  </cds-form-group>
+</form>

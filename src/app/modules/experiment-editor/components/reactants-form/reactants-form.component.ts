@@ -1,0 +1,76 @@
+import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ExperimentFormService} from '../../services/experiment-form.service';
+import {ClrForm} from '@clr/angular';
+
+/**
+ * Form component for experiment reactants.
+ */
+@Component({
+  selector: 'bch-reactants-form',
+  templateUrl: './reactants-form.component.html',
+  styleUrls: ['./reactants-form.component.scss'],
+  encapsulation: ViewEncapsulation.None
+})
+export class ReactantsFormComponent implements OnInit, OnDestroy {
+
+  @ViewChild(ClrForm, {static: true}) clrForm: ClrForm;
+
+  public form: FormGroup;
+
+  constructor(private experimentFormService: ExperimentFormService,
+              private fb: FormBuilder) {
+  }
+
+  /**
+   * Returns the reactions form array.
+   */
+  reactions(): FormArray {
+    return this.form.get('reactions') as FormArray;
+  }
+
+  /**
+   * Sets the form group by getting it from the experiment form service.
+   */
+  ngOnInit(): void {
+    this.form = this.experimentFormService.getExperimentFormSubGroup('reactants');
+  }
+
+  /**
+   * When we navigate away, we want the form to compute it's validity status. This way it sends an event through
+   * statusChanges and the timeline step directive can update the timeline status.
+   */
+  ngOnDestroy() {
+    this.form.markAllAsTouched();
+    this.form.updateValueAndValidity();
+  }
+
+  /**
+   * Adds a new reaction form group to the array.
+   */
+  addReaction() {
+    const reactionGroup = this.fb.group({
+      biocatalyst: [null, [Validators.required]],
+      name: [null, [Validators.required]],
+      reactants: this.fb.array([]),
+      selectedReaction: [null]
+    });
+    (this.form.get('reactions') as FormArray).push(reactionGroup);
+  }
+
+  /**
+   * Deletes the reaction from the form array.
+   *
+   * @param reaction Reaction to delete.
+   */
+  deleteReaction(reaction: AbstractControl) {
+    for (let i = 0; i < this.reactions().length; i++) {
+      if (this.reactions().at(i) === reaction) {
+        this.reactions().removeAt(i);
+        break;
+      }
+    }
+  }
+
+
+}

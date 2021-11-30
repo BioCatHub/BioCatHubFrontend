@@ -69,4 +69,16 @@ export class Enzyme {
     };
   }
 
+  /**
+   * Parses a Brenda DB result and returns the corresponding enzyme.
+   *
+   * @param brendaResult Input Brenda result.
+   */
+  public static fromBrendaResult(brendaResult: any): Enzyme {
+    const enzyme = new Enzyme();
+    enzyme.ecNumber = brendaResult.ecNumber;
+    enzyme.name = brendaResult.enzymeName;
+    return enzyme;
+  }
+
 }

@@ -15,11 +15,11 @@ export class Reactant {
   supplier: string;
   formula: string;
   smiles: string;
-  imageUrl: string;
   others: Attribute[];
 
   constructor() {
     this.others = [];
+    this.role = 'substrate';
   }
 
   /**
@@ -40,8 +40,7 @@ export class Reactant {
     reactant.formula = payload.formula;
     reactant.smiles = payload.smiles;
     reactant.stoichometricCoefficient = payload.stoichometricCoefficient;
-    reactant.imageUrl = payload.imageUrl;
-    reactant.others = payload.others.map(Attribute.deserialize);
+    reactant.others = payload.others ? payload.others.map(Attribute.deserialize) : [];
     return reactant;
   }
 
@@ -63,7 +62,6 @@ export class Reactant {
       formula: reactant.formula,
       stoichometricCoefficient: reactant.stoichometricCoefficient,
       smiles: reactant.smiles,
-      imageUrl: reactant.imageUrl,
       others: reactant.others.map(Attribute.serialize),
     };
   }

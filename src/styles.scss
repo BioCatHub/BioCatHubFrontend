@@ -1,0 +1,9 @@
+// Fix icon positions in buttons in dropdowns (https://github.com/vmware/clarity/issues/6448)
+.dropdown .dropdown-toggle.btn cds-icon {
+  margin-top: -.14rem;
+
+  &[shape=angle] {
+    margin-top: -.1rem;
+  }
+
+}

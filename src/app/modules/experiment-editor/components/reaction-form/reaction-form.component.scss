@@ -1,0 +1,14 @@
+bch-reaction-form {
+  width: 100%;
+
+  .datagrid-cell {
+    padding-top: .6rem !important;
+  }
+
+  clr-progress-bar.progress {
+    progress {
+      height: 5px;
+    }
+  }
+
+}

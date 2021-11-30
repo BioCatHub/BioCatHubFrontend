@@ -1,0 +1,24 @@
+bch-enzyme-search {
+
+  cds-icon[shape=search] {
+    width: 18px;
+  }
+
+  clr-dropdown {
+    width: 100%;
+  }
+
+  clr-dropdown-menu {
+    width: calc(100% - 1.75rem);
+    max-width: 100% !important;
+  }
+
+  .card {
+    margin-top: 0;
+  }
+
+  .card-block {
+    background-color: var(--cds-global-color-gray-50);
+  }
+
+}

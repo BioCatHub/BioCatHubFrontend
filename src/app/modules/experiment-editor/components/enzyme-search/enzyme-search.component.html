@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-block">
+
+    <clr-dropdown>
+
+      <cds-input-group layout="vertical">
+        <cds-input>
+          <label>Billing Limit</label>
+          <input placeholder="Search Brenda" [(ngModel)]="searchQuery" (ngModelChange)="searchEnzymes()"/>
+          <cds-control-action action="prefix" readonly>
+            <cds-icon shape="search"></cds-icon>
+          </cds-control-action>
+        </cds-input>
+      </cds-input-group>
+
+      <ng-template [(clrIfOpen)]="open">
+        <clr-dropdown-menu>
+          <div clrDropdownItem *ngFor="let enzyme of enzymes" (click)="selectResult(enzyme)">{{enzyme.name}}</div>
+        </clr-dropdown-menu>
+      </ng-template>
+
+    </clr-dropdown>
+
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div cds-layout="m-l:lg m-r:lg">
+  <clr-progress-bar class="detail-progress" [bchFormProgress]="form"
+                    #fp=formProgress [clrMax]="fp.max" [clrValue]="fp.value">
+  </clr-progress-bar>
+</div>
+
+<form [formGroup]="form" bchForm cds-layout="p:lg">
+  <cds-form-group layout="horizontal">
+
+    <cds-select layout="horizontal" bchControlGroup>
+      <label>Biocatalyst</label>
+      <select formControlName="biocatalyst" bchFormControl>
+        <option *ngFor="let biocatalyst of getBiocatalysts()"
+                [ngValue]="biocatalyst">{{biocatalyst.get('name').value}}</option>
+      </select>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'biocatalyst'">
+        Biocatalyst is required.
+      </cds-control-message>
+    </cds-select>
+
+    <cds-input layout="horizontal" bchControlGroup>
+      <label>Name</label>
+      <input placeholder="e.g. Alcohol dehydrogenase" formControlName="name" bchFormControl/>
+      <cds-control-message status="error" *bchIfError="'required';controlName: 'name'">
+        Name is required
+      </cds-control-message>
+    </cds-input>
+
+    <cds-select layout="horizontal" *ngIf="!brendaReactionsLoading">
+      <label>Select reaction from Brenda</label>
+      <select formControlName="selectedReaction">
+        <option *ngFor="let brendaReaction of brendaReactions"
+                [ngValue]="brendaReaction">{{brendaReaction.value}}</option>
+      </select>
+    </cds-select>
+
+    <cds-control layout="horizontal" *ngIf="brendaReactionsLoading">
+      <label>Select reaction from Brenda</label>
+      <div cds-control>
+        <clr-spinner [clrSmall]="true"></clr-spinner>
+      </div>
+    </cds-control>
+
+  </cds-form-group>
+</form>
+
+<clr-datagrid>
+
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-secondary" (click)="addReactant()">
+        <cds-icon shape="plus"></cds-icon>
+        Add reactant
+      </button>
+    </div>
+  </clr-dg-action-bar>
+
+  <clr-dg-column>Reactant name</clr-dg-column>
+  <clr-dg-column>Reactant role</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let reactant of reactants()" [clrDgItem]="reactant">
+
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="reactant.get('name').value"></bch-optional-parameter>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="reactant.get('role').value"></bch-optional-parameter>
+    </clr-dg-cell>
+
+  </clr-dg-row>
+
+  <clr-dg-placeholder>No reactions added yet</clr-dg-placeholder>
+
+  <clr-dg-detail *clrIfDetail="let detail">
+    <clr-dg-detail-header *ngIf="detail.get('name').value">{{detail.get('name').value}}</clr-dg-detail-header>
+    <clr-dg-detail-header *ngIf="!detail.get('name').value">New reactant</clr-dg-detail-header>
+    <clr-dg-detail-body>
+      <bch-reactant-form [form]="detail"></bch-reactant-form>
+      <div cds-layout="p-t:md p-r:lg p-b:lg horizontal align:right">
+        <cds-button action="outline" status="danger" size="sm" (click)="deleteReactant(detail)">Delete reactant
+        </cds-button>
+      </div>
+    </clr-dg-detail-body>
+  </clr-dg-detail>
+
+</clr-datagrid>

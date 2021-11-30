@@ -1,0 +1,53 @@
+<cds-button (click)="addEnzyme()">Add Enzyme</cds-button>
+
+<clr-datagrid>
+  <clr-dg-column>Name</clr-dg-column>
+  <clr-dg-column>Type</clr-dg-column>
+  <clr-dg-column>Organism</clr-dg-column>
+  <clr-dg-column>Concentration</clr-dg-column>
+  <clr-dg-column>
+    <ng-container *clrDgHideableColumn="{hidden: !(form.invalid && form.touched) || detailEnzyme !== null}">
+      Form status
+    </ng-container>
+  </clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let enzyme of enzymes().controls" [clrDgItem]="enzyme">
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="enzyme.get('name').value"></bch-optional-parameter>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="enzyme.get('type').value"></bch-optional-parameter>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="enzyme.get('organism').value"></bch-optional-parameter>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <bch-optional-parameter [parameter]="enzyme.get('concentration').value"></bch-optional-parameter>
+      {{enzyme.get('unit').value}}
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <cds-alert-group type="light" size="sm">
+        <cds-alert status="danger" *ngIf="enzyme.invalid">Enzyme form contains errors</cds-alert>
+        <cds-alert status="success" *ngIf="enzyme.valid">Enzyme form contains no errors</cds-alert>
+      </cds-alert-group>
+    </clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-placeholder>No enzymes added yet</clr-dg-placeholder>
+
+  <ng-template [(clrIfDetail)]="detailEnzyme">
+    <clr-dg-detail>
+      <clr-dg-detail-header>Edit enzyme</clr-dg-detail-header>
+      <clr-progress-bar class="detail-progress" [bchFormProgress]="detailEnzyme"
+                        #fp=formProgress [clrMax]="fp.max" [clrValue]="fp.value">
+      </clr-progress-bar>
+      <bch-enzyme-search cds-layout="p:lg" (selectEnzyme)="selectEnzymeFromSearch($event)"></bch-enzyme-search>
+      <bch-enzyme-form [form]="detailEnzyme"></bch-enzyme-form>
+      <div cds-layout="p-b:lg p-r:lg p-l:lg horizontal align:right">
+        <cds-button action="outline" status="danger" size="sm" (click)="deleteEnzyme(detailEnzyme)">Delete enzyme
+        </cds-button>
+      </div>
+    </clr-dg-detail>
+  </ng-template>
+
+</clr-datagrid>

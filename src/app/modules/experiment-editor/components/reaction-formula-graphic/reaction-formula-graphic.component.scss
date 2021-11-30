@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}
+
+.reactant-container {
+  display: inline-flex;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.reaction-text {
+  font-weight: 700;
+  font-size: .8rem;
+}
+
+.molecule-image {
+  height: 150px;
+  width: 150px;
+}
+
+.reaction-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}

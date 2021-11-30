@@ -1,0 +1,8 @@
+<clr-timeline>
+  <clr-timeline-step [clrState]="state.state" bchTimelineStepState [stepName]="step.formControlName" #state="state"
+                     *ngFor="let step of timelineSteps">
+    <clr-timeline-step-title [routerLink]="step.pathSegment">{{step.title}}</clr-timeline-step-title>
+  </clr-timeline-step>
+</clr-timeline>
+
+<router-outlet></router-outlet>

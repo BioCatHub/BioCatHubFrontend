@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-header" *ngIf="form.get('name')?.value">
+    {{form.get('name')?.value}}
+  </div>
+  <div class="card-header" *ngIf="!form.get('name')?.value">
+    Unnamed reaction
+  </div>
+  <div class="card-block">
+    <div class="reaction-container" *ngIf="getReactantsCount() > 0">
+      <div *ngFor="let substrate of getSubstrateImagePaths(); let i = index" class="reactant-container">
+        <img [src]="substrate" class="molecule-image" alt="Molecule image"/>
+        <span class="reaction-text" *ngIf="i < getSubstrateImagePaths().length - 1">+</span>
+      </div>
+
+      <div class="reactant-container">
+        <span class="reaction-text">⇌</span>
+      </div>
+
+      <div *ngFor="let product of getProductImagePaths(); let i = index" class="reactant-container">
+        <img [src]="product" class="molecule-image" alt="Molecule image"/>
+        <span class="reaction-text" *ngIf="i < getProductImagePaths().length - 1">+</span>
+      </div>
+    </div>
+    <cds-alert status="info" *ngIf="getReactantsCount() === 0">
+      This reaction has no reactants yet.
+    </cds-alert>
+
+  </div>
+</div>

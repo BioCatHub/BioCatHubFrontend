@@ -1,0 +1,58 @@
+<h1>Vessels & Volumes</h1>
+
+<div class="card">
+  <div class="card-block">
+
+    <div class="progress top">
+      <progress [bchFormProgress]="form"></progress>
+    </div>
+
+    <form [formGroup]="form" bchForm cds-layout="p-t:md">
+      <cds-form-group layout="horizontal">
+
+        <cds-input layout="horizontal" bchControlGroup>
+          <label>Type</label>
+          <input placeholder="e.g. Eppendorf tube" formControlName="type" bchFormControl/>
+          <cds-control-message status="error" *bchIfError="'required';controlName: 'type'">
+            Type is required
+          </cds-control-message>
+        </cds-input>
+
+        <cds-input-group layout="horizontal" bchControlGroup>
+          <label>Volume</label>
+          <cds-input>
+            <label>Volume</label>
+            <input placeholder="e.g. 100" formControlName="volume" bchFormControl/>
+          </cds-input>
+          <cds-select cds-layout="align:shrink">
+            <label>Unit</label>
+            <select bchFormControl formControlName="unit">
+              <option [ngValue]="unit" *ngFor="let unit of units">{{unit}}</option>
+            </select>
+          </cds-select>
+          <cds-control-message status="error" *bchIfError="'required';controlName: 'volume'">
+            Volume is required
+          </cds-control-message>
+          <cds-control-message status="error" *bchIfError="'float';controlName: 'volume'">
+            Volume needs to be given as valid floating point number
+          </cds-control-message>
+        </cds-input-group>
+
+        <div formArrayName="attributes" cds-layout="vertical gap:lg">
+          <bch-attribute-input *ngFor="let attribute of attributes().controls; let i=index"
+                               (removeAttribute)="removeAttribute(i)"
+                               [formControlName]="i"></bch-attribute-input>
+        </div>
+
+        <bch-add-attribute-dropdown [attributeKeys]="['Color', 'Material', 'Weight']"
+                                    (addAttribute)="attributes().push($event)">
+        </bch-add-attribute-dropdown>
+
+
+      </cds-form-group>
+    </form>
+
+  </div>
+</div>
+
+<bch-experiment-editor-nav-buttons [routeNext]="'../biocatalyst'"></bch-experiment-editor-nav-buttons>

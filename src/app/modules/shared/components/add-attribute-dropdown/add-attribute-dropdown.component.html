@@ -1,0 +1,16 @@
+<clr-dropdown>
+  <button class="btn btn-link btn-sm" clrDropdownTrigger>
+    <cds-icon shape="plus"></cds-icon>
+    Add attribute
+    <cds-icon shape="angle" direction="down"></cds-icon>
+  </button>
+  <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+    <div clrDropdownItem (click)="emitAttribute('')">Manual</div>
+    <clr-dropdown *ngIf="attributeKeys.length > 0">
+      <button clrDropdownTrigger>Select form Template</button>
+      <clr-dropdown-menu clrPosition="right-top">
+        <button clrDropdownItem (click)="emitAttribute(key)" *ngFor="let key of attributeKeys">{{key}}</button>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </clr-dropdown-menu>
+</clr-dropdown>
